@@ -15,13 +15,13 @@ def listado_autos(request):
 
     contexto = {}
 
-    return render(request, 'rentacars/listado_alumnos.html', contexto)
+    return render(request, 'rentacars/listado_autos.html', contexto)
 
 def alta_auto(request):
     
     contexto = {}
 
-    return render(request, 'rentacars/alta_auto.html', contexto)
+    return render(request, 'rentacars/alta_autos.html', contexto)
 
 def nosotros(request):
     
