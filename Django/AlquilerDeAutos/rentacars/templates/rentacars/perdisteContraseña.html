@@ -1,0 +1,22 @@
+{% extends "rentacars/base.html" %}
+{% load static %}
+
+{% block titulo %}PerdisteContraseña{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'rentacars/styles/base.css' %}">
+{% endblock %}
+
+{% block main %}
+
+    <h2>Loguin</h2> 
+        <form method="POST" action="{% url 'perdisteContraseña' %}">
+            {% csrf_token %}
+            {{ perdisteContraseñaForm.as_p }}
+
+            <input type="submit">
+        <br>
+        </form>
+
+
+{% endblock %}

@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .import forms 
+# Otra opcion: from .forms import * (y se le quita forms abajo)
+
 # Create your views here.
 def index(request):
     # Accedo a la BBDD a traves de los modelos
@@ -33,5 +36,13 @@ def contacto(request):
     return render(request, 'rentacars/contacto.html', contexto)
 
 def loguin(request):
-    contexto = {}
+    contexto = {
+        'loguin_form' : forms.LoguinForm()
+    }
     return render(request, 'rentacars/loguin.html', contexto)
+
+def perdisteContraseña(request):
+    contexto = {
+        'perdisteContraseña_form' : forms.perdisteContraseñaForm()
+    }
+    return render(request, 'rentacars/perdisteContraseña.html', contexto)

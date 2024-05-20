@@ -8,5 +8,6 @@ urlpatterns = [
     path('nosotros', views.nosotros, name='nosotros'),
     path('contacto', views.contacto, name='contacto'),
     path('loguin', views.loguin, name='loguin'),
+    path('perdisteContraseña', views.perdisteContraseña, name='perdisteContraseña'),
     
 ]
