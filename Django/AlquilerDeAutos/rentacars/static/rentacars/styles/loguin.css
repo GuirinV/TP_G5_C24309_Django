@@ -1,0 +1,27 @@
+item-button .btn{
+    color:white;
+}
+
+item-button .item-button {
+    margin-left: auto;
+    background-color: #FF543e;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    transition: all .2s ease;
+    border-radius: 25px; 
+    font-weight: 700;
+}
+
+.item-button i{padding-right: 8px;}
+
+item-button .item-button:hover {
+background-color: white;
+border: solid 2px #FF543e ;
+color:#FF543e ;
+}

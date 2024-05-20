@@ -31,3 +31,7 @@ def contacto(request):
     contexto = {}
 
     return render(request, 'rentacars/contacto.html', contexto)
+
+def loguin(request):
+    contexto = {}
+    return render(request, 'rentacars/loguin.html', contexto)

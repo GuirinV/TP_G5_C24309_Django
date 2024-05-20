@@ -1,0 +1,26 @@
+{% extends "rentacars/base.html" %}
+{% load static %}
+
+{% block titulo %}Loguin{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'rentacars/styles/loguin.css' %}">
+{% endblock %}
+
+{% block main %}
+
+    <h2>Loguin</h2>
+    <form method="POST" action="{% url 'loguin' %}">
+        <!-- {% csrf_token %}
+        {{ loguin_form.as_p }} -->
+
+        <label for="usuario"></label>
+                  <input id="usuario" type="text" name="usuario" id="usuario" placeholder="Usuario" required>
+                  <br>
+                  <label for="password"></label>
+                  <input id="password" type="password" id="password" placeholder="Contraseña" name="password" required>
+                  <br>
+                  <button type="submit" title="Ingresar" name="Ingresar" id="Ingresar">Login</button>
+        <input type="submit">
+    </form>
+{% endblock %}
