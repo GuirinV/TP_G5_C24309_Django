@@ -1,0 +1,66 @@
+{% extends "rentacars/base.html" %}
+{% load static %}
+
+{% block titulo %}Rentacars{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'rentacars/styles/listadoA.css' %}">
+{% endblock %}
+
+{% block main %}
+    <h2>Listado de autos </h2>
+    <section class="cardAuto">
+      <div class="card mb-3" >
+        <div class="row g-0 ">
+          <div class="col-md-4">
+            <img src="../../static/rentacars/img/auto1.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Chevrolet</h5>
+              <p class="card-text"> Modelo: Pick Ups</p>
+              <p class="card-text"> Color : Blanco</p>
+              <p class="card-text"> Precio : $20.000 por día</p>
+              <button type="button" class="btnAlquilar"> Alquilar..</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="card mb-3" >
+        <div class="row g-0 ">
+          <div class="col-md-4">
+            <img src="../../static/rentacars/img/auto2.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Chevrolet</h5>
+              <p class="card-text"> Modelo: SUVs</p>
+              <p class="card-text"> Color : Gris</p>
+              <p class="card-text"> Precio : $60.000 por día</p>
+              <button type="button" class="btnAlquilar"> Alquilar..</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="card mb-3" >
+        <div class="row g-0 ">
+          <div class="col-md-4">
+            <img src="../../static/rentacars/img/auto3.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Chevrolet</h5>
+              <p class="card-text"> Modelo: Montana</p>
+              <p class="card-text"> Color : Negro</p>
+              <p class="card-text"> Precio : $70.000 por día</p>
+              <button type="button" class="btnAlquilar"> Alquilar..</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+
+{% endblock %}
