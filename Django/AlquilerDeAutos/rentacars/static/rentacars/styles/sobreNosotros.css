@@ -18,5 +18,5 @@
 
 .container ol {
     padding-left: 20px;
-    list-style-type: none; /* Quitar la numeración de los elementos li */
+    list-style-type: none; 
 }
