@@ -16,14 +16,14 @@
         <div id="contenedorcentrado">
             <div id="login">
 
-    <form method="POST" action="{% url 'loguin' %}">
-        {% csrf_token %}
-        {{ loguin_form.as_p }}
+        <form method="POST" action="{% url 'loguin' %}">
+            {% csrf_token %}
+            {{ loguin_form.as_p }}
 
-        <input type="submit">
+            <input type="submit">
         <br>
-    </form>
-
+        </form>
+    </div>
 
     <div id="derecho">
         <div class="titulo">
@@ -31,11 +31,11 @@
         </div><br>
     <hr>
     <div class="pie-form">
-        <a href="./PerdisteContraseña.html">¿Perdiste tu contraseña?</a><br>
-        <a href="./Registrarse.html">¿No tienes Cuenta? Registrate</a><br>
+        <a href="{% url 'perdisteContraseña' %}">¿Perdiste tu contraseña?</a><br>
+        <a href="{% url 'registrarse' %}">¿No tienes Cuenta? Registrate</a><br>
         <hr><br>
         <a href="../index.html">Volver</a>
-    </div>
+    
                 </div>
             </div>
     </div>

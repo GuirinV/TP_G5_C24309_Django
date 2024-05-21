@@ -9,5 +9,6 @@ urlpatterns = [
     path('contacto', views.contacto, name='contacto'),
     path('loguin', views.loguin, name='loguin'),
     path('perdisteContraseña', views.perdisteContraseña, name='perdisteContraseña'),
+    path('registrarse', views.registrarse, name='registrarse'),
     
 ]
