@@ -1,0 +1,22 @@
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container p {
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.container h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.container ol {
+    padding-left: 20px;
+    list-style-type: none; 
+}
