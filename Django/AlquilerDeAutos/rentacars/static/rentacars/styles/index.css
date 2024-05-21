@@ -1,0 +1,34 @@
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-group{
+    background-color: #FF543e;
+}
+
+.btnAlquilar {
+    background-color: #FF543e;
+    color: #f3eae9;
+    border-radius: 20px;
+    width: 150px;
+    height: 50px;
+}
+.btn {
+    color: #f3eae9;
+    border-top: 2px solid #FF543e;
+}
+
+.carousel-control-next-icon , .carousel-control-prev-icon , .carousel-indicators{
+    background-color:  #FF543e;
+}
+
+.card {
+  
+    max-width: 840px;
+}
+
+.cardAuto {
+    padding-left: 2%;
+}

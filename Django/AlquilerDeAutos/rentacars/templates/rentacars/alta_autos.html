@@ -1,0 +1,41 @@
+{% extends "rentacars/base.html" %}
+{% load static %}
+
+{% block titulo %}Rentacars{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'rentacars/styles/altaAutos.css' %}">
+{% endblock %}
+
+{% block main %}
+    <h2> Alta de nuevo auto</h2>
+
+    <form action="">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Modelo</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Color</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Precio</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Imagen</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  
+
+{% endblock %}

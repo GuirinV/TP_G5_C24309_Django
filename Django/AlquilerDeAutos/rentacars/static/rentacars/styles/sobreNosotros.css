@@ -1,16 +1,4 @@
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
 
 .container {
     max-width: 800px;
@@ -25,16 +13,10 @@ header {
 
 .container h2 {
     margin-bottom: 10px;
-    color: #333;
+    text-align: center;
 }
 
 .container ol {
     padding-left: 20px;
     list-style-type: none; /* Quitar la numeración de los elementos li */
-}
-
-@media only screen and (max-width: 600px) {
-    .container {
-        padding: 10px;
-    }
 }

@@ -7,76 +7,48 @@
 <link rel="stylesheet" href="{% static 'rentacars/styles/sobreNosotros.css' %}">
 {% endblock %}
 
+{% block main %}
+<section>
+<div class="container">
+    <h2>Nuestra Historia</h2>
+    <p>En RentaCar, nuestra pasión por los viajes nos llevó a fundar nuestra agencia de alquiler de autos en 2020.
+        Desde entonces, hemos estado comprometidos en proporcionar a nuestros clientes una experiencia de alquiler de
+        autos excepcional que va más allá de lo ordinario.</p>
+    <p>Comenzamos como una pequeña empresa local, pero con dedicación y compromiso, hemos crecido hasta convertirnos en
+        una reconocida agencia de alquiler de autos a nivel regional. A lo largo de los años, hemos acumulado
+        experiencia y conocimientos que nos permiten ofrecer soluciones de alquiler de autos personalizadas y servicios
+        de alta calidad que satisfacen las necesidades individuales de cada cliente.</p>
 
+    <h2>¿Por qué Elegirnos?</h2>
+    <ol>
+        <li>
+            <p><strong>Excelente Servicio al Cliente:</strong> En RentaCar, nuestros clientes son nuestra prioridad
+                número uno. Nos esforzamos por brindar un servicio al cliente excepcional en cada paso del camino. Desde
+                el momento en que haces tu reserva hasta que devuelves el vehículo, nuestro equipo profesional estará
+                contigo para garantizar una experiencia sin contratiempos.</p>
+        </li>
+        <li>
+            <p><strong>Variedad de Vehículos:</strong> Con una amplia flota de vehículos que incluye desde económicos y
+                compactos hasta lujosos y familiares, tenemos el auto perfecto para satisfacer tus necesidades de viaje.
+                Ya sea un viaje de negocios, unas vacaciones en familia o una escapada de fin de semana, tenemos el
+                vehículo adecuado para ti.</p>
+        </li>
+        <li>
+            <p><strong>Precios Competitivos:</strong> Ofrecemos tarifas competitivas y transparentes que se adaptan a
+                cualquier presupuesto. Sin tarifas ocultas ni sorpresas desagradables, puedes confiar en nosotros para
+                ofrecerte las mejores ofertas de alquiler de autos sin sacrificar la calidad ni el servicio.</p>
+        </li>
+        <li>
+            <p><strong>Experiencia y Confianza:</strong> Con 4 años en la industria, hemos ganado la confianza de
+                nuestros clientes gracias a nuestra experiencia y compromiso con la excelencia. Puedes confiar en
+                nosotros para proporcionarte un servicio de alquiler de autos confiable y de alta calidad en cada viaje
+                que realices.</p>
+        </li>
+    </ol>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .container p {
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .container h2 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .container ol {
-            padding-left: 20px;
-            list-style-type: none; /* Quitar la numeración de los elementos li */
-        }
-
-        @media only screen and (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Sobre Nosotros</h1>
-    </header>
-    <div class="container">
-        <h2>Nuestra Historia</h2>
-        <p>En RentaCar, nuestra pasión por los viajes nos llevó a fundar nuestra agencia de alquiler de autos en [Año de Fundación]. Desde entonces, hemos estado comprometidos en proporcionar a nuestros clientes una experiencia de alquiler de autos excepcional que va más allá de lo ordinario.</p>
-        <p>Comenzamos como una pequeña empresa local, pero con dedicación y compromiso, hemos crecido hasta convertirnos en una reconocida agencia de alquiler de autos a nivel regional. A lo largo de los años, hemos acumulado experiencia y conocimientos que nos permiten ofrecer soluciones de alquiler de autos personalizadas y servicios de alta calidad que satisfacen las necesidades individuales de cada cliente.</p>
-
-        <h2>Por Qué Elegirnos</h2>
-        <ol>
-            <li>
-                <p><strong>Excelente Servicio al Cliente:</strong> En RentaCar, nuestros clientes son nuestra prioridad número uno. Nos esforzamos por brindar un servicio al cliente excepcional en cada paso del camino. Desde el momento en que haces tu reserva hasta que devuelves el vehículo, nuestro equipo profesional estará contigo para garantizar una experiencia sin contratiempos.</p>
-            </li>
-            <li>
-                <p><strong>Variedad de Vehículos:</strong> Con una amplia flota de vehículos que incluye desde económicos y compactos hasta lujosos y familiares, tenemos el auto perfecto para satisfacer tus necesidades de viaje. Ya sea un viaje de negocios, unas vacaciones en familia o una escapada de fin de semana, tenemos el vehículo adecuado para ti.</p>
-            </li>
-            <li>
-                <p><strong>Precios Competitivos:</strong> Ofrecemos tarifas competitivas y transparentes que se adaptan a cualquier presupuesto. Sin tarifas ocultas ni sorpresas desagradables, puedes confiar en nosotros para ofrecerte las mejores ofertas de alquiler de autos sin sacrificar la calidad ni el servicio.</p>
-            </li>
-            <li>
-                <p><strong>Experiencia y Confianza:</strong> Con [Número de Años] años en la industria, hemos ganado la confianza de nuestros clientes gracias a nuestra experiencia y compromiso con la excelencia. Puedes confiar en nosotros para proporcionarte un servicio de alquiler de autos confiable y de alta calidad en cada viaje que realices.</p>
-            </li>
-        </ol>
-
-        <p>En RentaCar, estamos aquí para hacer que tu experiencia de alquiler de autos sea fácil, conveniente y sin complicaciones. ¡Contáctanos hoy mismo para comenzar tu próximo viaje!</p>
-    </div>
-</body>
-</html>
+    <p>En RentaCar, estamos aquí para hacer que tu experiencia de alquiler de autos sea fácil, conveniente y sin
+        complicaciones. <a href="{% url 'contacto' %}"><strong>¡Contáctanos</strong></a> hoy mismo para comenzar tu
+        próximo viaje!</p>
+</div>
+</section>
+{% endblock %}
