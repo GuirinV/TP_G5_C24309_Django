@@ -11,33 +11,27 @@
 
     <!-- loguin -->
     <h2>Loguin</h2> 
-
-    <div id="contenedor">
-        <div id="contenedorcentrado">
             <div id="login">
+                <form method="POST" action="{% url 'loguin' %}">
+                    {% csrf_token %}
+                    {{ loguin_form.as_p }}
 
-        <form method="POST" action="{% url 'loguin' %}">
-            {% csrf_token %}
-            {{ loguin_form.as_p }}
-
-            <input type="submit">
-        <br>
-        </form>
-    </div>
-
-    <div id="derecho">
-        <div class="titulo">
-            Bienvenido
-        </div><br>
-    <hr>
-    <div class="pie-form">
-        <a href="{% url 'perdisteContraseña' %}">¿Perdiste tu contraseña?</a><br>
-        <a href="{% url 'registrarse' %}">¿No tienes Cuenta? Registrate</a><br>
-        <hr><br>
-        <a href="../index.html">Volver</a>
-    
-                </div>
+                    <input type="submit">
+                <br>
+                </form>
             </div>
-    </div>
+
+                <div class="titulo">
+                    Bienvenido
+                </div><br>
+
+                <hr>
+                <div class="pie-form">
+                    <a href="{% url 'perdisteContraseña' %}">¿Perdiste tu contraseña?</a><br>
+                    <a href="{% url 'registrarse' %}">¿No tienes Cuenta? Registrate</a><br>
+                    <hr><br>
+                    <a href="{% url 'index' %}">Volver</a>
+                </div>
+
 
 {% endblock %}

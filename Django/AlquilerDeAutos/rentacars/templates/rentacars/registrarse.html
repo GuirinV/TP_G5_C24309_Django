@@ -10,7 +10,7 @@
 {% block main %}
 
     <h2>Loguin</h2> 
-        <form method="POST" action="{% url 'resgistrarse' %}">
+        <form method="POST" action="{% url 'registrarse' %}">
             {% csrf_token %}
             {{ registrarseForm.as_p }}
 
