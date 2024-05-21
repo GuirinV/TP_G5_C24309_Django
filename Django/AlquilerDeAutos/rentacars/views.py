@@ -43,6 +43,12 @@ def loguin(request):
 
 def perdisteContraseña(request):
     contexto = {
-        'perdisteContraseña_form' : forms.perdisteContraseñaForm()
+        'perdisteContraseña_form' : forms.ContraseñaForm()
     }
     return render(request, 'rentacars/perdisteContraseña.html', contexto)
+
+def registrarse(request):
+    contexto = {
+        'registrarse_form' : forms.RegistrarseForm()
+    }
+    return render(request, 'rentacars/registrarse.html', contexto)

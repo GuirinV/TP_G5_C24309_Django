@@ -6,3 +6,8 @@ class LoguinForm (forms.Form):
 
 class ContraseñaForm (forms.Form):
     email = forms.EmailField(label='Email', required='True')
+
+
+class RegistrarseForm  (forms.Form):
+    usuario = forms.CharField(label='Nombre de Usuario', required='True')
+    email = forms.EmailField(label='Email', required='True')
