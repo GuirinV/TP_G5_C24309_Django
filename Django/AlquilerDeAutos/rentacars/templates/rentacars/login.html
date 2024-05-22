@@ -32,7 +32,7 @@
             <div id="login" style="color: white;">
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
-                    {{ iniciar_sesion_form.as_p }}
+                    {{ login_form.as_p }}
                     <input type="submit">
                 <br>
                 </form>
