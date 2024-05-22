@@ -1,14 +1,12 @@
 {% extends "rentacars/base.html" %}
 {% load static %}
 
-{% block titulo %}Loguin{% endblock %}
-
+{% block titulo %}Rentacars{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'rentacars/styles/login.css' %}">
 {% endblock %}
 
 {% block main %}
-
 
 <body>
   <div class="container-fluid bg-dark" id="about">
@@ -28,25 +26,18 @@
       </div>
       <div class="col-md-6">
         <br>
-        <h2 style="color: white;">Acceder</h2> 
+        <h3 style="color: white;">Ingrese su correo electronico y le enviaremos un mail para resetear su contraseña</h3> 
             <div id="login" style="color: white;">
-                <form method="POST" action="{% url 'login' %}">
+                <form method="POST" action="{% url 'perdiste_Contraseña' %}">
                     {% csrf_token %}
-                    {{ login_form.as_p }}
+                    {{ perdiste_Contraseña_form.as_p }}
                     <input type="submit">
                 <br>
                 </form>
 
-                <div class="titulo">
-                  <hr>
-                    Bienvenido!
-                </div><br>
                   <hr>
                 <div class="pie-form">
-                    <a href="{% url 'perdiste_Contraseña' %}">¿Perdiste tu contraseña?</a><br>
-                    <a href="{% url 'registrarse' %}">¿No tienes Cuenta? Registrate</a><br>
-                    <hr><br>
-                    <a href="{% url 'index' %}">Volver</a>
+                    <a href="{% url 'login' %}">Volver</a>
                 </div>
             </div>
       </div>
@@ -56,4 +47,3 @@
 </body>
 
 {% endblock %}
-

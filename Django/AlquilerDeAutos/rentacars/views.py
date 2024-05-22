@@ -31,11 +31,11 @@ def login(request):
     }
     return render(request, 'rentacars/login.html', contexto)
 
-def perdisteContraseña(request):
+def perdiste_Contraseña(request):
     contexto = {
-        'perdisteContraseña_form' : forms.ContraseñaForm()
+        'perdiste_Contraseña_form' : forms.Perdiste_ContraseñaForm()
     }
-    return render(request, 'rentacars/perdisteContraseña.html', contexto)
+    return render(request, 'rentacars/perdiste_Contraseña.html', contexto)
 
 def registrarse(request):
     contexto = {

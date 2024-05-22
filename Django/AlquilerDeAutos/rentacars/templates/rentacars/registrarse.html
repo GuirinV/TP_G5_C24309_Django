@@ -1,22 +1,51 @@
 {% extends "rentacars/base.html" %}
 {% load static %}
 
-{% block titulo %}PerdisteContraseña{% endblock %}
-
+{% block titulo %}Rentacars{% endblock %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'rentacars/styles/base.css' %}">
+    <link rel="stylesheet" href="{% static 'rentacars/styles/login.css' %}">
 {% endblock %}
 
 {% block main %}
 
-    <h2>Loguin</h2> 
-        <form method="POST" action="{% url 'registrarse' %}">
-            {% csrf_token %}
-            {{ registrarseForm.as_p }}
 
-            <input type="submit">
+
+<body>
+  <div class="container-fluid bg-dark" id="about">
+    <div class="row">
+      <div class="col-md-6">
+        <img
+          style="
+            height: 100px;
+            width: 100%;
+            height: auto;
+          "
+          class="img-responsive"
+          class="ms-5"
+          src="../../static/rentacars/img/autoprueba5.jpg"
+
+        />
+      </div>
+      <div class="col-md-6">
         <br>
-        </form>
+        <h2 style="color: white;">Acceder</h2> 
+            <div id="registrarse" style="color: white;">
+                <form method="POST" action="{% url 'registrarse' %}">
+                    {% csrf_token %}
+                    {{ registrarse_form.as_p }}
+                    <input type="submit">
+                <br>
+                </form>
 
+                  <hr>
+                <div class="pie-form">
+                    <a href="{% url 'index' %}">Volver</a>
+                </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
 
 {% endblock %}
