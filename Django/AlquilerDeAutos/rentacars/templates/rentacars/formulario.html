@@ -1,0 +1,105 @@
+{% extends 'rentacars/base.html' %}
+{#{% load widget_tweaks %}#}
+
+{% block extra_css %}
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+    {% block head_form %}
+    {% endblock %}
+    <!-- Content -->
+    <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-auto mt-3">
+                            <form method="post" action="" enctype="multipart/form-data" name="form">
+                                <div class="card card-default">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            {% if action == 'add' %}
+                                                <i class="fas fa-plus-circle"></i>
+                                            {% else %}
+                                                <i class="fas fa-edit"></i>
+                                            {% endif %}
+                                            {{ titulo }}
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        {% csrf_token %}
+                                        {#  itera los campos del formulario para luego personalizar los campos#}
+                                        {% if form.errors %}
+                                            <div class="alert alert-danger alert-dismissible">
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                        aria-hidden="true">
+                                                    ×
+                                                </button>
+                                                <h5><i class="icon fas fa-ban"></i> Ha ocurrido un error al enviar el
+                                                    formulario
+                                                </h5>
+                                                <ul>
+                                                    {% for field in form %}
+                                                        {% for error in field.errors %}
+                                                            <li>{{ error }}</li>
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+
+                                        {% for field in form.visible_fields %}
+                                            <div class="form-group">
+                                                <label for="email"> {{ field.label }}:</label>
+                                                {{ field }}
+                                            </div>
+                                        {% endfor %}
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Marca</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                   placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i>
+                                            Enviar
+                                        </button>
+                                        <a href="{{ list_url }}" class="btn btn-danger "><i class="fas fa-times"></i>
+                                            Cancelar
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+        {#    aca se van a agregar los alerts de confirmación y error#}
+        {#    ejemplo#}
+        <script>
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+        </script>
+    </div>
+    </body>
+{% endblock %}

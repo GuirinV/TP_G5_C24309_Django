@@ -23,6 +23,12 @@ def alta_auto(request):
 
     return render(request, 'rentacars/alta_autos.html', contexto)
 
+
+def formulario(request):
+    contexto = {}
+
+    return render(request, 'rentacars/formulario.html', contexto)
+
 def nosotros(request):
     
     contexto = {}
