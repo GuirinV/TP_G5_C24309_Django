@@ -29,7 +29,7 @@ def login(request):
     contexto = {
         'login_form' : forms.LoginForm()
     }
-    return render(request, 'rentacars/iniciar_sesion.html', contexto)
+    return render(request, 'rentacars/login.html', contexto)
 
 def perdisteContraseña(request):
     contexto = {
