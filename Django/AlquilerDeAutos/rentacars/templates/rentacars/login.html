@@ -4,7 +4,7 @@
 {% block titulo %}Loguin{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'rentacars/styles/loguin.css' %}">
+    <link rel="stylesheet" href="{% static 'rentacars/styles/login.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -30,9 +30,9 @@
         <br>
         <h2 style="color: white;">Acceder</h2> 
             <div id="login" style="color: white;">
-                <form method="POST" action="{% url 'loguin' %}">
+                <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
-                    {{ loguin_form.as_p }}
+                    {{ iniciar_sesion_form.as_p }}
                     <input type="submit">
                 <br>
                 </form>

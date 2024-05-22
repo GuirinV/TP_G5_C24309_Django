@@ -84,7 +84,7 @@ header .item-button {
     font-weight: 700;
 }
 
-.item-button i{padding-right: 8px;}
+.item-button i{padding-right: 20px;}
 
 header .item-button:hover {
 background-color: white;

@@ -1,6 +1,6 @@
 from django import forms
 
-class LoguinForm (forms.Form):
+class LoginForm (forms.Form):
     usuario = forms.CharField(label='Nombre de Usuario', required='True')
     password= forms.CharField(widget=forms.PasswordInput)
 
