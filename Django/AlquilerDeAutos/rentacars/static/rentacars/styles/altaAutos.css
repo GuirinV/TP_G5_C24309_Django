@@ -1,0 +1,100 @@
+
+body {
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/fondo_auto.jpg');
+
+}
+
+   form  {
+    margin: 20vh auto 0 auto;
+    width: 800px;
+    background-color: rgba(245, 245, 245, 0.7); 
+    border: 3px solid #DE7D39;
+    padding: 20px;
+    border-radius: 15px;
+    padding-bottom: 40px;
+}
+
+h1{
+    color: #3B1301;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+button {
+    background-color: #DE7D39; 
+    color: #fff; 
+    border: none; 
+    padding: 10px 20px;
+    width: 30%; 
+    cursor: pointer; 
+    border-radius: 10px; 
+    display: block; 
+    margin: auto; 
+    font-weight: bold; 
+}
+
+button:hover {
+    background-color: #3B1301; 
+    color: white;
+    padding: 10px 20px;
+    width: 30%;
+    cursor: pointer;
+    border: none;
+    display: block; 
+    margin: auto;
+    font-weight: bold;
+    cursor: pointer; 
+}
+
+img {
+    display: block; 
+    margin: auto; 
+    width: 300px;
+    padding-top: 40px;
+}
+
+.input_clase {
+    display: block; 
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: auto;
+}
+
+form label {
+    color: #3B1301; 
+    font-weight: bold; 
+    font-size: 16px; 
+    display: block; 
+    width: 70%; 
+    margin-bottom: 5px; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.success {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 15px;
+    background-color: rgba(0, 128, 0, 0.8); 
+    color: #fff;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    list-style-type: none;
+}
+
+li{
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 15px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    list-style-type: none;
+}
+

@@ -59,9 +59,13 @@ header .navb-items ul li a {
     color: #3B1301;
 }
 
+header .navb-items ul li a .item-button {
+    color: white;
+}
+
 header .navb-items ul li a:hover {
-    color: #FF543e;
-    border-top: 2px solid #FF543e;
+    color: #DE7D39; 
+    border-top: 2px solid #DE7D39; 
 }
 
 header .btn{
@@ -70,7 +74,7 @@ header .btn{
 
 header .item-button {
     margin-left: auto;
-    background-color: #FF543e;
+    background-color: #DE7D39; 
     width: 150px;
     height: 50px;
     display: flex;
@@ -88,8 +92,8 @@ header .item-button {
 
 header .item-button:hover {
 background-color: white;
-border: solid 2px #FF543e ;
-color:#FF543e ;
+border: solid 2px #DE7D39; 
+color:#DE7D39; 
 }
 
 /* Toggle Menu Styles */
@@ -177,7 +181,7 @@ color:#FF543e ;
 }
 
 .modal-body .modal-line:hover{
-    color: #FF543e;
+    color: #DE7D39; 
     border-bottom: 1px solid white;
 }
 
@@ -189,7 +193,7 @@ color:#FF543e ;
 }
 
 .modal-line a:hover{
-color:#FF543e;
+color:#DE7D39; 
 }
 .modal-line i {
     color: currentColor;
@@ -208,14 +212,14 @@ color:#FF543e;
     align-items: center;
     font-size:20px;
     font-weight: 700;
-    color:#FF543e;
+    color:#DE7D39; 
     letter-spacing: 2px;
     transition: all .5s ease;
     border-radius: 25px; 
 }
 
 .navb-button:hover{
-    background-color: #FF543e;
+    background-color: #DE7D39; 
     color: #fefefe;
 }
 
@@ -232,7 +236,7 @@ color:#FF543e;
 }
 
 .mobil-modal-footer i:hover {
-    color: #FF543e;
+    color: #DE7D39; 
 }
 
 /*FOOTER*/

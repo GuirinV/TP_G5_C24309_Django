@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect  
 from django.http import HttpResponse
+from django.contrib import messages
 
 from .import forms 
+from .forms import alta_autosForm
 # Otra opcion: from .forms import * (y se le quita forms abajo)
 
 # Create your views here.
@@ -13,8 +15,17 @@ def listado_autos(request):
     contexto = {}
     return render(request, 'rentacars/listado_autos.html', contexto)
 
-def alta_auto(request):
+def alta_autos(request):
     contexto = {}
+    if request.method == "GET":
+        contexto['alta_autos_form'] = alta_autosForm()
+    else:
+        form = alta_autosForm(request.POST)
+        contexto['alta_autos_form'] = form  
+        # Validar el formulario
+        if form.is_valid():
+            messages.success(request, 'El Auto fue dado de alta con éxito')
+            return redirect('alta_autos')
     return render(request, 'rentacars/alta_autos.html', contexto)
 
 def nosotros(request):

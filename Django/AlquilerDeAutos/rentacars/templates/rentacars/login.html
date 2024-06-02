@@ -22,7 +22,7 @@
           "
           class="img-responsive"
           class="ms-5"
-          src="../../static/rentacars/img/autoprueba5.jpg"
+          src="../../static/rentacars/img/fondo_auto.jpg"
 
         />
       </div>
@@ -33,7 +33,7 @@
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
                     {{ login_form.as_p }}
-                    <input type="submit">
+                    <button type="submit">Enviar</button>
                 <br>
                 </form>
 
@@ -46,7 +46,8 @@
                     <a href="{% url 'perdiste_Contraseña' %}">¿Perdiste tu contraseña?</a><br>
                     <a href="{% url 'registrarse' %}">¿No tienes Cuenta? Registrate</a><br>
                     <hr><br>
-                    <a href="{% url 'index' %}">Volver</a>
+                    <button type="submit" class="boton_volver">volver</button>
+                    <br>
                 </div>
             </div>
       </div>
