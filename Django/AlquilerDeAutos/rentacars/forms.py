@@ -21,11 +21,12 @@ class RegistrarseForm (forms.Form):
 
 
 class alta_autosForm(forms.Form):
-    Marca = forms.CharField(label='Marca', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
-    Modelo = forms.CharField(label='Modelo', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
-    Color = forms.CharField(label='Color', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
-    Precio = forms.CharField(label='Precio', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='') 
-
+    marca = forms.CharField(label='Marca', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
+    modelo = forms.CharField(label='Modelo', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
+    color = forms.CharField(label='Color', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
+    patente = forms.CharField(label='Patente', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
+    precio = forms.CharField(label='Precio', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='') 
+    imagen = forms.CharField(label='Imagen', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='' )
     def clean_Marca(self):
         marca = self.cleaned_data['Marca']
         if not marca.isalpha():

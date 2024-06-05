@@ -3,64 +3,102 @@
 
 {% block titulo %}Rentacars{% endblock %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'rentacars/styles/listadoA.css' %}">
+<link rel="stylesheet" href="{% static 'rentacars/styles/listadoA.css' %}">
 {% endblock %}
 
 {% block main %}
-    <h2>Listado de autos </h2>
-    <section class="cardAuto">
-      <div class="card mb-3" >
-        <div class="row g-0 ">
-          <div class="col-md-4">
-            <img src="../../static/rentacars/img/auto1.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Chevrolet</h5>
-              <p class="card-text"> Modelo: Pick Ups</p>
-              <p class="card-text"> Color : Blanco</p>
-              <p class="card-text"> Precio : $20.000 por día</p>
-              <button type="button" class="btnAlquilar"> Alquilar..</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="card mb-3" >
-        <div class="row g-0 ">
-          <div class="col-md-4">
-            <img src="../../static/rentacars/img/auto2.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Chevrolet</h5>
-              <p class="card-text"> Modelo: SUVs</p>
-              <p class="card-text"> Color : Gris</p>
-              <p class="card-text"> Precio : $60.000 por día</p>
-              <button type="button" class="btnAlquilar"> Alquilar..</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="card mb-3" >
-        <div class="row g-0 ">
-          <div class="col-md-4">
-            <img src="../../static/rentacars/img/auto3.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Chevrolet</h5>
-              <p class="card-text"> Modelo: Montana</p>
-              <p class="card-text"> Color : Negro</p>
-              <p class="card-text"> Precio : $70.000 por día</p>
-              <button type="button" class="btnAlquilar"> Alquilar..</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-  
+<h2>Listado de autos</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Imagen</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Color</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for auto in autos %}
+        <tr>
+            <td>
+                <img src="{{ auto.imagen }}" class="img-fluid" alt="{{ auto.marca }}" style="max-width: 100px;">
+            </td>
+            <td>{{ auto.marca }}</td>
+            <td>{{ auto.modelo }}</td>
+            <td>{{ auto.color }}</td>
+            <td>${{ auto.precio }} por día</td>
+            <td>
+                <!-- Botón para abrir el modal de edición -->
+                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ auto.id }}">Editar</button>
+                <!-- Botón para abrir el modal de eliminación -->
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ auto.id }}">Eliminar</button>
+            </td>
+        </tr>
 
+        <div class="modal fade" id="editModal{{ auto.id }}" tabindex="-1" aria-labelledby="editModalLabel{{ auto.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="{% url 'editar_auto' auto.id %}">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel{{ auto.id }}">Editar Auto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="marca{{ auto.id }}" class="form-label">Marca</label>
+                                <input type="text" class="form-control" id="marca{{ auto.id }}" name="marca" value="{{ auto.marca }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="modelo{{ auto.id }}" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" id="modelo{{ auto.id }}" name="modelo" value="{{ auto.modelo }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="color{{ auto.id }}" class="form-label">Color</label>
+                                <input type="text" class="form-control" id="color{{ auto.id }}" name="color" value="{{ auto.color }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="precio{{ auto.id }}" class="form-label">Precio</label>
+                                <input type="number" class="form-control" id="precio{{ auto.id }}" name="precio" value="{{ auto.precio }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="imagen{{ auto.id }}" class="form-label">Imagen</label>
+                                <input type="text" class="form-control" id="imagen{{ auto.id }}" name="imagen" value="{{ auto.imagen }}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteModal{{ auto.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ auto.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="{% url 'eliminar_auto' auto.id %}">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel{{ auto.id }}">Eliminar Auto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Está seguro que desea eliminar el auto <strong>{{ auto.marca }} {{ auto.modelo }}</strong>?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
