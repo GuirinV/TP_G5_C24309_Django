@@ -1,60 +1,40 @@
 {% extends "rentacars/base.html" %}
 {% load static %}
 
-{% block titulo %}Loguin{% endblock %}
+{% block titulo %}Iniciar Sesión{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'rentacars/styles/login.css' %}">
 {% endblock %}
 
 {% block main %}
-
-
-<body>
-  <div class="container-fluid bg-dark" id="about">
+<div class="container-fluid bg-dark" id="about">
     <div class="row">
-      <div class="col-md-6">
-        <img
-          style="
-            height: 100px;
-            width: 100%;
-            height: auto;
-          "
-          class="img-responsive"
-          class="ms-5"
-          src="../../static/rentacars/img/fondo_auto.jpg"
-
-        />
-      </div>
-      <div class="col-md-6">
-        <br>
-        <h2 style="color: white;">Acceder</h2> 
+        <div class="col-md-6">
+            <img style="height: 100px; width: 100%; height: auto;" class="img-responsive" src="{% static 'rentacars/img/autoprueba5.jpg' %}" />
+        </div>
+        <div class="col-md-6">
+            <br>
+            <h2 style="color: white;">Acceder</h2>
             <div id="login" style="color: white;">
+                {% if messages %}
+                    <div>
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
                     {{ login_form.as_p }}
-                    <button type="submit">Enviar</button>
-                <br>
+                    <input type="submit" value="Iniciar Sesión">
                 </form>
-
-                <div class="titulo">
-                  <hr>
-                    Bienvenido!
-                </div><br>
-                  <hr>
+                <hr>
                 <div class="pie-form">
-                    <a href="{% url 'perdiste_Contraseña' %}">¿Perdiste tu contraseña?</a><br>
-                    <a href="{% url 'registrarse' %}">¿No tienes Cuenta? Registrate</a><br>
-                    <hr><br>
-                    <button type="submit" class="boton_volver">volver</button>
-                    <br>
+                    <a href="{% url 'index' %}">Volver</a>
                 </div>
             </div>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
-</body>
-
 {% endblock %}
-

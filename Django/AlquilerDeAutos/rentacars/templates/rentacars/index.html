@@ -47,7 +47,8 @@
                   <p class="card-text">Modelo: {{ auto.modelo }}</p>
                   <p class="card-text">Color: {{ auto.color }}</p>
                   <p class="card-text">Precio: ${{ auto.precio }} por día</p>
-                  <button type="button" class="btnAlquilar">Alquilar</button>
+                  <button type="button" class="btnAlquilar"> <a href="{% url 'crear_alquiler' auto.id %}" class="btnAlquilar">Alquilar</a></button>
+                
               </div>
           </div>
       </div>

@@ -1,0 +1,11 @@
+{% extends "rentacars/base.html" %}
+{% block titulo %}Crear Alquiler{% endblock %}
+{% block main %}
+<h2>Crear Alquiler para {{ auto.marca }} {{ auto.modelo }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'listado_autos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

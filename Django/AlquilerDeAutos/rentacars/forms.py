@@ -1,5 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from .models import Alquiler
+
 
 class LoginForm (forms.Form):
     usuario = forms.CharField(label='Nombre de Usuario', required='True', widget=forms.TextInput(attrs={'class': 'input_clase2'}),label_suffix='')
@@ -9,13 +11,13 @@ class Perdiste_ContraseñaForm (forms.Form):
     email = forms.EmailField(label='Email', required='True')
 
 class RegistrarseForm (forms.Form):
-    Nombre = forms.CharField(label='Nombre', required='True')
-    Apellido = forms.CharField(label='Apellido', required='True')
-    CUIT = forms.IntegerField(label='CUIT/CUIL', required='True')
-    direccion = forms.CharField(label='Direccion', required='True')
-    telefono = forms.IntegerField(label='Telefono', required='True')
-    email = forms.EmailField(label='Email', required='True')
-    usuario = forms.CharField(label='Nombre de Usuario', required='True')
+    Nombre = forms.CharField(label='Nombre', required=True)
+    Apellido = forms.CharField(label='Apellido', required=True)
+    CUIT = forms.IntegerField(label='CUIT/CUIL', required=True)
+    direccion = forms.CharField(label='Direccion', required=True)
+    telefono = forms.IntegerField(label='Telefono', required=True)
+    email = forms.EmailField(label='Email', required=True)
+    username = forms.CharField(label='username', required=True)
     password= forms.CharField(widget=forms.PasswordInput)
     Confirmapassword= forms.CharField(widget=forms.PasswordInput)
 
@@ -26,7 +28,7 @@ class alta_autosForm(forms.Form):
     color = forms.CharField(label='Color', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
     patente = forms.CharField(label='Patente', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
     precio = forms.CharField(label='Precio', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='') 
-    imagen = forms.CharField(label='Imagen', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='' )
+    imagen = forms.CharField(label='Imagen', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
     def clean_Marca(self):
         marca = self.cleaned_data['Marca']
         if not marca.isalpha():
@@ -45,3 +47,12 @@ class alta_autosForm(forms.Form):
     def clean(self):
         print(self.cleaned_data)
         return self.cleaned_data
+    
+class AlquilerForm(forms.ModelForm):
+    class Meta:
+        model = Alquiler
+        fields = ['fecha_inicio', 'fecha_fin']
+        widgets = {
+            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
+        }

@@ -1,0 +1,27 @@
+{% extends "rentacars/base.html" %}
+{% block titulo %}Listado de Alquileres{% endblock %}
+{% block main %}
+<h2>Listado de Alquileres</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Auto</th>
+            <th>Usuario</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Fin</th>
+            <th>Precio Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for alquiler in alquileres %}
+        <tr>
+            <td>{{ alquiler.auto }}</td>
+            <td>{{ alquiler.usuario }}</td>
+            <td>{{ alquiler.fecha_inicio }}</td>
+            <td>{{ alquiler.fecha_fin }}</td>
+            <td>${{ alquiler.precio_total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

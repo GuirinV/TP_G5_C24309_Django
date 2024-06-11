@@ -19,5 +19,7 @@ from rentacars import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('rentacars/', include('rentacars.urls'))
+    path('rentacars/', include('rentacars.urls')),
+    path('accounts/login/', views.login, name='login')
+
  ]
