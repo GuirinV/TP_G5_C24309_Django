@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.decorators import login_required
 from .import forms 
-from .forms import LoginForm, alta_autosForm
-from  .models import Auto, Usuario
+from .forms import alta_autosForm
+from  .models import Auto, Usuario, Alquiler
 from .forms import AlquilerForm
 from .forms import RegistrarseForm
+from django.contrib.auth import login
 
 # Otra opcion: from .forms import * (y se le quita forms abajo)
 
@@ -78,39 +78,78 @@ def registrarse(request):
         form = RegistrarseForm(request.POST)
         contexto['Registrarse_Form'] = form
         if form.is_valid():
-            nuevo_usuario = Usuario(
-                nombre=form.cleaned_data['Nombre'],
-                apellido=form.cleaned_data['Apellido'],
-                cuit=form.cleaned_data['CUIT'],
-                direccion=form.cleaned_data['direccion'],
-                telefono=form.cleaned_data['telefono'],
+            user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
                 email=form.cleaned_data['email'],
-                usuario=form.cleaned_data['usuario'],
-                password = form.cleaned_data['password']
+                first_name=form.cleaned_data['nombre'],  
+                last_name=form.cleaned_data['apellido'] 
+            )
+            nuevo_usuario = Usuario(
+                user=user,
+                nombre=form.cleaned_data['nombre'],
+                apellido=form.cleaned_data['apellido'],
+                cuit=form.cleaned_data['cuit'],
+                direccion=form.cleaned_data['direccion'],
+                telefono=form.cleaned_data['telefono']
             )
             nuevo_usuario.save()
-            # Redirigir al usuario a una página de éxito o a cualquier otra página deseada
+            login(request, user)  # Iniciar sesión automáticamente
             return redirect('index')
     return render(request, 'rentacars/registrarse.html', contexto)
 
 @login_required
 def crear_alquiler(request, auto_id):
     auto = get_object_or_404(Auto, id=auto_id)
-    usuario = request.user
 
     if request.method == 'POST':
         form = AlquilerForm(request.POST)
         if form.is_valid():
             alquiler = form.save(commit=False)
-            alquiler.auto = auto
-            alquiler.usuario = usuario
-            alquiler.precio_total = (alquiler.fecha_fin - alquiler.fecha_inicio).days * auto.precio
-            alquiler.save()
+            usuario_auth = request.user
+            try:
+                usuario = Usuario.objects.get(user=usuario_auth)
+                alquiler.usuario = usuario
+                alquiler.auto = auto
+                alquiler.save()
+                messages.success(request, 'Alquiler creado con éxito.')
+                return redirect('listado_alquileres')
+            except Usuario.DoesNotExist:
+                messages.error(request, 'Usuario no encontrado.')
+        else:
+            messages.error(request, 'Formulario no válido. Por favor, verifica los datos ingresados.')
+    else:
+        form = AlquilerForm()
+
+    return render(request, 'rentacars/crear_alquiler.html', {'form': form, 'auto': auto})
+
+def listado_alquileres(request):
+    alquileres = Alquiler.objects.all()
+    return render(request, 'rentacars/listado_alquileres.html', {'alquileres': alquileres})
+
+def editar_alquiler(request, alquiler_id):
+    alquiler = get_object_or_404(Alquiler, id=alquiler_id)
+
+    if request.method == 'POST':
+        form = AlquilerForm(request.POST, instance=alquiler)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Alquiler actualizado con éxito.')
             return redirect('listado_alquileres')
     else:
-        form = AlquilerForm(initial={'auto': auto, 'usuario': usuario})
+        form = AlquilerForm(instance=alquiler)
 
-    return render(request, 'rentacars/crear_alquiler.html', {'form': form, 'auto': auto, 'usuario': usuario})
+    return render(request, 'rentacars/editar_alquiler.html', {'form': form})
+
+def eliminar_alquiler(request, alquiler_id):
+    alquiler = get_object_or_404(Alquiler, id=alquiler_id)
+
+    if request.method == 'POST':
+        alquiler.delete()
+        messages.success(request, 'Alquiler eliminado con éxito.')
+        return redirect('listado_alquileres')
+
+    return render(request, 'rentacars/eliminar_alquiler.html', {'alquiler': alquiler})
 
 def nosotros(request):
     contexto = {}
@@ -121,23 +160,6 @@ def contacto(request):
     return render(request, 'rentacars/contacto.html', contexto)
 
 
-def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['usename']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                auth_login(request, user)
-                return redirect('index')  # Redirige a la página principal u otra página deseada
-            else:
-                messages.error(request, 'Nombre de usuario o contraseña incorrectos')
-    else:
-        form = LoginForm()
-
-    contexto = {'login_form': form}
-    return render(request, 'rentacars/login.html', contexto)
 
 
 def perdiste_Contraseña(request):

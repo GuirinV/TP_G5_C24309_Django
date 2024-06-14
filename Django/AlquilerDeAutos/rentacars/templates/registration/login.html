@@ -11,7 +11,7 @@
 <div class="container-fluid bg-dark" id="about">
     <div class="row">
         <div class="col-md-6">
-            <img style="height: 100px; width: 100%; height: auto;" class="img-responsive" src="{% static 'rentacars/img/autoprueba5.jpg' %}" />
+            <img style="width: 100%; height: auto;" class="img-responsive" src="{% static 'rentacars/img/autoprueba5.jpg' %}" />
         </div>
         <div class="col-md-6">
             <br>
@@ -26,7 +26,7 @@
                 {% endif %}
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
-                    {{ login_form.as_p }}
+                    {{ form.as_p }}
                     <input type="submit" value="Iniciar Sesión">
                 </form>
                 <hr>

@@ -1,26 +1,27 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Alquiler
+from django.contrib.auth.models import User
+
 
 
 class LoginForm (forms.Form):
-    usuario = forms.CharField(label='Nombre de Usuario', required='True', widget=forms.TextInput(attrs={'class': 'input_clase2'}),label_suffix='')
-    password= forms.CharField(label='Password', required='True',widget=forms.PasswordInput(attrs={'class': 'input_clase2'}),label_suffix='')
+    username = forms.CharField(label='Nombre de Usuario', required=True, widget=forms.TextInput(attrs={'class': 'input_clase2'}),label_suffix='')
+    password= forms.CharField(label='Password', required=True,widget=forms.PasswordInput(attrs={'class': 'input_clase2'}),label_suffix='')
 
 class Perdiste_ContraseñaForm (forms.Form):
-    email = forms.EmailField(label='Email', required='True')
-
-class RegistrarseForm (forms.Form):
-    Nombre = forms.CharField(label='Nombre', required=True)
-    Apellido = forms.CharField(label='Apellido', required=True)
-    CUIT = forms.IntegerField(label='CUIT/CUIL', required=True)
-    direccion = forms.CharField(label='Direccion', required=True)
-    telefono = forms.IntegerField(label='Telefono', required=True)
     email = forms.EmailField(label='Email', required=True)
-    username = forms.CharField(label='username', required=True)
-    password= forms.CharField(widget=forms.PasswordInput)
-    Confirmapassword= forms.CharField(widget=forms.PasswordInput)
 
+class RegistrarseForm(forms.ModelForm):
+    nombre = forms.CharField(max_length=30)
+    apellido = forms.CharField(max_length=30)
+    direccion = forms.CharField(max_length=100)
+    cuit = forms.CharField(max_length=20)
+    telefono = forms.CharField(max_length=20)
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'nombre', 'apellido', 'cuit', 'direccion', 'telefono']
 
 class alta_autosForm(forms.Form):
     marca = forms.CharField(label='Marca', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
@@ -51,7 +52,7 @@ class alta_autosForm(forms.Form):
 class AlquilerForm(forms.ModelForm):
     class Meta:
         model = Alquiler
-        fields = ['fecha_inicio', 'fecha_fin']
+        fields = ['fecha_inicio', 'fecha_fin', 'precio_total']
         widgets = {
             'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
             'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
