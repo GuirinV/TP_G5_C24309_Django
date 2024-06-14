@@ -31,13 +31,13 @@ class alta_autosForm(forms.Form):
     precio = forms.CharField(label='Precio', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='') 
     imagen = forms.CharField(label='Imagen', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
     def clean_Marca(self):
-        marca = self.cleaned_data['Marca']
+        marca = self.cleaned_data['marca']
         if not marca.isalpha():
             raise ValidationError("La Marca solo puede estar compuesta por letras")
         return self.cleaned_data['Marca']
 
     def clean_Precio(self):
-        precio = self.cleaned_data['Precio']
+        precio = self.cleaned_data['precio']
         # Intenta convertir el precio a un entero
         try:
             precio_entero = int(precio)
