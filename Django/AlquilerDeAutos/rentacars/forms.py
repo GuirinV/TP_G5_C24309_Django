@@ -1,5 +1,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms import ModelForm
+
+from .models import Alquiler
+
 
 class LoginForm (forms.Form):
     usuario = forms.CharField(label='Nombre de Usuario', required='True', widget=forms.TextInput(attrs={'class': 'input_clase2'}),label_suffix='')
@@ -45,3 +49,14 @@ class alta_autosForm(forms.Form):
     def clean(self):
         print(self.cleaned_data)
         return self.cleaned_data
+
+
+class alquiler_autosForm(ModelForm):
+
+    class Meta:
+        model = Alquiler
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['precio_total'].disabled = True

@@ -5,6 +5,7 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('listado_autos', views.listado_autos, name='listado_autos'),
     path('alta_autos', views.alta_autos, name='alta_autos'),
+    path('alquiler_autos/', views.alquiler_autos, name='alquiler_autos'),
     path('editar_auto/<int:id>', views.editar_auto, name='editar_auto'),
     path('eliminar_auto/<int:id>', views.eliminar_auto, name='eliminar_auto'),
     path('nosotros', views.nosotros, name='nosotros'),
@@ -12,5 +13,6 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('perdiste_Contraseña', views.perdiste_Contraseña, name='perdiste_Contraseña'),
     path('registrarse', views.registrarse, name='registrarse'),
-    
+    path('get_precio_diario/<int:id>/', views.get_precio_diario, name='obtener_precio_diario'),
+
 ]
