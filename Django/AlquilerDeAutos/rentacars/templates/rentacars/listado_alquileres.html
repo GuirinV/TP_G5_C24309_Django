@@ -1,0 +1,97 @@
+{% extends "rentacars/base.html" %}
+{% load static %}
+
+{% block titulo %}Listado de Alquileres{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'rentacars/styles/listadoA.css' %}">
+{% endblock %}
+
+{% block main %}
+<h2>Listado de Alquileres</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Auto</th>
+            <th>Usuario</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Fin</th>
+            <th>Precio Total</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for alquiler in alquileres %}
+        <tr>
+            <td>{{ alquiler.auto }}</td>
+            <td>{{ alquiler.usuario }}</td>
+            <td>{{ alquiler.fecha_inicio }}</td>
+            <td>{{ alquiler.fecha_fin }}</td>
+            <td>${{ alquiler.precio_total }}</td>
+            <td>
+                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#editModal{{ alquiler.id }}">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#deleteModal{{ alquiler.id }}">Cancelar</button>
+            </td>
+        </tr>
+
+        <div class="modal fade" id="editModal{{ alquiler.id }}" tabindex="-1"
+            aria-labelledby="editModalLabel{{ alquiler.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="{% url 'editar_alquiler' alquiler.id %}">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel{{ alquiler.id }}">Editar Alquiler</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="fecha_inicio{{ alquiler.id }}" class="form-label">Fecha de Inicio</label>
+                                <input type="date" class="form-control" id="fecha_inicio{{ alquiler.id }}"
+                                    name="fecha_inicio" value="{{ alquiler.fecha_inicio }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fecha_fin{{ alquiler.id }}" class="form-label">Fecha de Fin</label>
+                                <input type="date" class="form-control" id="fecha_fin{{ alquiler.id }}" name="fecha_fin"
+                                    value="{{ alquiler.fecha_fin }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="precio_total{{ alquiler.id }}" class="form-label">Precio Total</label>
+                                <input type="number" class="form-control" id="precio_total{{ alquiler.id }}"
+                                    name="precio_total" value="{{ alquiler.precio_total }}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteModal{{ alquiler.id }}" tabindex="-1"
+            aria-labelledby="deleteModalLabel{{ alquiler.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel{{ alquiler.id }}">Cancelar Alquiler</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estás seguro de que deseas cancelar este alquiler?</p>
+                        <form method="post" action="{% url 'eliminar_alquiler' alquiler.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

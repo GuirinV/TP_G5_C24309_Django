@@ -7,45 +7,29 @@
 {% endblock %}
 
 {% block main %}
-
-
-
 <body>
   <div class="container-fluid bg-dark" id="about">
     <div class="row">
       <div class="col-md-6">
-        <img
-          style="
-            height: 100px;
-            width: 100%;
-            height: auto;
-          "
-          class="img-responsive"
-          class="ms-5"
-          src="../../static/rentacars/img/autoprueba5.jpg"
-
-        />
+        <img style="height: 100px; width: 100%; height: auto;" class="img-responsive ms-5" src="../../static/rentacars/img/autoprueba5.jpg" />
       </div>
       <div class="col-md-6">
         <br>
         <h2 style="color: white;">Acceder</h2> 
-            <div id="registrarse" style="color: white;">
-                <form method="POST" action="{% url 'registrarse' %}">
-                    {% csrf_token %}
-                    {{ registrarse_form.as_p }}
-                    <input type="submit">
-                <br>
-                </form>
-
-                  <hr>
-                <div class="pie-form">
-                    <a href="{% url 'index' %}">Volver</a>
-                </div>
-            </div>
+        <div id="registrarse" style="color: white;">
+          <form method="POST" action="{% url 'registrarse' %}">
+            {% csrf_token %}
+            {{ Registrarse_Form.as_p }}
+            <input type="submit">
+            <br>
+          </form>
+          <hr>
+          <div class="pie-form">
+            <a href="{% url 'index' %}">Volver</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </body>
-
 {% endblock %}

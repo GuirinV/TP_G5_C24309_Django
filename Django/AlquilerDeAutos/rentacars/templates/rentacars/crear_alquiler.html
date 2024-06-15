@@ -1,0 +1,37 @@
+{% extends "rentacars/base.html" %}
+{% load static %}
+{% block titulo %}Crear alquiler{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'rentacars/styles/crear_alquiler.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <img src="{{ auto.imagen }}" class="card-img-top" alt="{{ auto.marca }} {{ auto.modelo }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }}</h5>
+                    <p class="card-text"><strong>Color:</strong> {{ auto.color }}</p>
+                    <p class="card-text"><strong>Precio:</strong> ${{ auto.precio }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" action="{% url 'crear_alquiler' auto.id %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a href="{% url 'listado_autos' %}" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

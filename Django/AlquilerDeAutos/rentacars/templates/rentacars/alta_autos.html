@@ -28,7 +28,11 @@
             <h1>Alta de Autos</h1>
             {% csrf_token %}
             {{ alta_autos_form.as_p }}
-            <button type="submit">Guardar</button>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" ><a href="{% url 'index' %}" style="color: white; text-decoration: none;">Volver</a></button>
+                <button type="submit" >Guardar</button>
+            </div>
         </form>
         <img src="{% static 'rentacars/img/logo3.png' %}" alt="logo">
     </div>

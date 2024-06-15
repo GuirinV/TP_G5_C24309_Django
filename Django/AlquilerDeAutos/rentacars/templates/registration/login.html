@@ -1,0 +1,40 @@
+{% extends "rentacars/base.html" %}
+{% load static %}
+
+{% block titulo %}Iniciar Sesión{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'rentacars/styles/login.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid bg-dark" id="about">
+    <div class="row">
+        <div class="col-md-6">
+            <img style="width: 100%; height: auto;" class="img-responsive" src="{% static 'rentacars/img/autoprueba5.jpg' %}" />
+        </div>
+        <div class="col-md-6">
+            <br>
+            <h2 style="color: white;">Acceder</h2>
+            <div id="login" style="color: white;">
+                {% if messages %}
+                    <div>
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Iniciar Sesión">
+                </form>
+                <hr>
+                <div class="pie-form">
+                    <a href="{% url 'index' %}">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
