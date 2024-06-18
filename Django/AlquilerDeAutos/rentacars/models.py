@@ -1,5 +1,3 @@
-import datetime
-
 from django.db import models
 
 from django.utils import timezone
@@ -17,6 +15,7 @@ class Auto(models.Model):
     def __str__(self):
 
         return f"Marca={self.marca}, modelo={self.modelo}"
+
 
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

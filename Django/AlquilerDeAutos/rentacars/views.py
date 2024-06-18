@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .import forms 
 from .forms import alta_autosForm
-from  .models import Auto, Usuario, Alquiler
+from .models import Auto, Usuario, Alquiler
 from .forms import AlquilerForm
 from .forms import RegistrarseForm
 from django.contrib.auth import login
