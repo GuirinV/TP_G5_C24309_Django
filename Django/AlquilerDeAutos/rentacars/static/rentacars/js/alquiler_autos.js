@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const fechaInicioInput = document.getElementById('id_fecha_inicio');
     const fechaFinInput = document.getElementById('id_fecha_fin');
-    const autoInput = document.getElementById('id_auto');
+    const autoId = document.getElementById('id_auto').value;
     const precioTotal = document.getElementById('id_precio_total');
 
     async function getPrecioDiario (autoId){
@@ -13,9 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     async function calculatePrice() {
         const fechaInicio = new Date(fechaInicioInput.value);
         const fechaFin = new Date(fechaFinInput.value);
-        // const precioDiario = parseFloat(precioDiarioInput.value);
-        const precioDiario = await getPrecioDiario(autoInput.value);
-        console.log(precioDiario)
+        const precioDiario = await getPrecioDiario(autoId);
+
 
         if (!isNaN(fechaInicio) && !isNaN(fechaFin) && !isNaN(precioDiario)) {
             const delta = fechaFin - fechaInicio;
@@ -23,13 +22,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const total = dias * precioDiario;
             precioTotal.value = `${total.toFixed(2)}`;
         } else {
-            precioTotal.innerText = '0.0';
+            precioTotal.value = 0.0;
+            console.log(precioDiario)
         }
     }
 
-    autoInput.addEventListener('change', calculatePrice);
+    // autoInput.addEventListener('change', calculatePrice);
     fechaInicioInput.addEventListener('change', calculatePrice);
     fechaFinInput.addEventListener('change', calculatePrice);
 
-    console.log("hola")
+
 });

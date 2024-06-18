@@ -22,7 +22,7 @@ def obtener_autos():
     return contexto
 
 def get_precio_diario(request, id):
-    auto = Auto.objects.get(id=id)
+    auto = get_object_or_404(Auto, id=id)
     data = {
         'precio_diario': str(auto.precio)
     }
@@ -140,12 +140,14 @@ def crear_alquiler(request, auto_id):
     if request.method == 'POST':
         form = AlquilerForm(request.POST)
         if form.is_valid():
+            dias = form.cleaned_data['fecha_fin'] - form.cleaned_data['fecha_inicio']
             alquiler = form.save(commit=False)
             usuario_auth = request.user
             try:
                 usuario = Usuario.objects.get(user=usuario_auth)
                 alquiler.usuario = usuario
                 alquiler.auto = auto
+                alquiler.precio_total = auto.precio * (dias.days + 1)
                 alquiler.save()
                 messages.success(request, 'Alquiler creado con éxito.')
                 return redirect('listado_alquileres')

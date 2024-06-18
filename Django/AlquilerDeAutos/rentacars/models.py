@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 from django.utils import timezone
@@ -32,12 +34,14 @@ class Usuario(models.Model):
         return f"{self.nombre} {self.apellido}"
 
 
+
+
 class Alquiler(models.Model):
     auto = models.ForeignKey(Auto, on_delete=models.CASCADE, verbose_name='Auto')
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Usuario')
 
-    fecha_inicio = models.DateField(default=timezone.now(), verbose_name='Fecha de inicio')
-    fecha_fin = models.DateField(default=timezone.now(), verbose_name='Fecha de fin')
+    fecha_inicio = models.DateField(verbose_name='Fecha de inicio')
+    fecha_fin = models.DateField(verbose_name='Fecha de fin')
     precio_total = models.FloatField(verbose_name='Precio total', blank=True)
 
     def __str__(self):
