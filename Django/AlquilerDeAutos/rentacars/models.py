@@ -1,5 +1,10 @@
+import datetime
+
 from django.db import models
+
+from django.utils import timezone
 from django.contrib.auth.models import User
+
 
 class Auto(models.Model):
     marca = models.CharField(max_length=100, verbose_name='Marca')
@@ -10,7 +15,9 @@ class Auto(models.Model):
     imagen = models.CharField(verbose_name='Imagen')
 
     def __str__(self):
-        return f'{self.marca} {self.modelo} ({self.patente})'
+
+        return f"Marca={self.marca}, modelo={self.modelo}"
+
 
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -26,15 +33,21 @@ class Usuario(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
+
+
+
 class Alquiler(models.Model):
     auto = models.ForeignKey(Auto, on_delete=models.CASCADE, verbose_name='Auto')
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Usuario')
+
     fecha_inicio = models.DateField(verbose_name='Fecha de inicio')
     fecha_fin = models.DateField(verbose_name='Fecha de fin')
-    precio_total = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Precio total')
-    
+    precio_total = models.FloatField(verbose_name='Precio total', blank=True)
+
     def __str__(self):
         return f"Auto: {self.auto} ,Cliente: {self.usuario} , Fecha inicio: {self.fecha_inicio} ,fecha Entrega: {self.fecha_fin}, total: {self.precio_total}"
 
+
 Auto.usuarios = models.ManyToManyField(Usuario, through=Alquiler, related_name='autos')
 Usuario.autos = models.ManyToManyField(Auto, through=Alquiler, related_name='usuarios')
+
