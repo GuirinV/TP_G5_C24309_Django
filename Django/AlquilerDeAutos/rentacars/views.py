@@ -10,7 +10,8 @@ from .forms import alta_autosForm
 from .models import Auto, Usuario, Alquiler
 from .forms import AlquilerForm
 from .forms import RegistrarseForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+
 
 # Otra opcion: from .forms import * (y se le quita forms abajo)
 
@@ -32,6 +33,10 @@ def index(request):
     contexto = obtener_autos()
     # Accedo a la BBDD a traves de los modelos
     return render(request, 'rentacars/index.html', contexto)
+
+def usuario_logout(request):
+    logout(request)
+    return render(request, 'login')
 
 def listado_autos(request):
     contexto = obtener_autos()
@@ -133,7 +138,7 @@ def registrarse(request):
             return redirect('index')
     return render(request, 'rentacars/registrarse.html', contexto)
 
-@login_required
+@login_required()
 def crear_alquiler(request, auto_id):
     auto = get_object_or_404(Auto, id=auto_id)
 
