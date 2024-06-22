@@ -90,12 +90,11 @@
                     <form method="post" action="{% url 'eliminar_auto' auto.id %}">
                         {% csrf_token %}
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel{{ auto.id }}">Eliminar Auto</h5>
+                            <h5 class="modal-title" id="deleteModalLabel{{ auto.id }}"  style="color: white;" >Eliminar Auto</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>¿Está seguro que desea eliminar el auto <strong>{{ auto.marca }} {{ auto.modelo
-                                    }}</strong>?</p>
+                            <p>¿Está seguro que desea eliminar el auto <strong>{{ auto.marca }} {{ auto.modelo }}</strong>?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
