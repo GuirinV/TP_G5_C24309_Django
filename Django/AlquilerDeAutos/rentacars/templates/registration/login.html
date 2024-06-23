@@ -15,7 +15,11 @@
         </div>
         <div class="col-md-6">
             <br>
+            {% if not user.is_authenticated %}
             <h2 style="color: white;">Acceder</h2>
+            {% else %}
+            <h2 style="color: white;">Cerrar Sesión</h2>
+            {% endif %}
             <div id="login" style="color: white;">
                 {% if messages %}
                     <div>
@@ -24,12 +28,25 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <form method="POST" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Iniciar Sesión">
-                </form>
-                <hr>
+                {% if not user.is_authenticated %}
+                    {% if next %}
+                        <form method="POST" action="{% url 'login'%}">
+                        <input type="hidden" name="next" value="{{ next }}">
+                    {% else %}
+                        <form method="POST" action="{% url 'login' %}">
+                    {% endif %}
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Iniciar Sesión">                        
+                        </form>
+                    
+                {% else %}
+                <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Cerrar sesión">
+                    </form>
+                {% endif %}
+            <hr>
                 <div class="pie-form">
                     <a href="{% url 'index' %}">Volver</a>
                 </div>

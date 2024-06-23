@@ -44,32 +44,32 @@
                     <form method="post" action="{% url 'editar_auto' auto.id %}">
                         {% csrf_token %}
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ auto.id }}">Editar Auto</h5>
+                            <h5 class="modal-title" id="editModalLabel{{ auto.id }}" style="color: white;" >Editar Auto</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="marca{{ auto.id }}" class="form-label">Marca</label>
+                                <label for="marca{{ auto.id }}" class="form-label" style="color: white;" >Marca</label>
                                 <input type="text" class="form-control" id="marca{{ auto.id }}" name="marca"
                                     value="{{ auto.marca }}">
                             </div>
                             <div class="mb-3">
-                                <label for="modelo{{ auto.id }}" class="form-label">Modelo</label>
+                                <label for="modelo{{ auto.id }}" class="form-label" style="color: white;" >Modelo</label>
                                 <input type="text" class="form-control" id="modelo{{ auto.id }}" name="modelo"
                                     value="{{ auto.modelo }}">
                             </div>
                             <div class="mb-3">
-                                <label for="color{{ auto.id }}" class="form-label">Color</label>
+                                <label for="color{{ auto.id }}" class="form-label" style="color: white;" >Color</label>
                                 <input type="text" class="form-control" id="color{{ auto.id }}" name="color"
                                     value="{{ auto.color }}">
                             </div>
                             <div class="mb-3">
-                                <label for="precio{{ auto.id }}" class="form-label">Precio</label>
+                                <label for="precio{{ auto.id }}" class="form-label" style="color: white;" >Precio</label>
                                 <input type="number" class="form-control" id="precio{{ auto.id }}" name="precio"
                                     value="{{ auto.precio }}">
                             </div>
                             <div class="mb-3">
-                                <label for="imagen{{ auto.id }}" class="form-label">Imagen</label>
+                                <label for="imagen{{ auto.id }}" class="form-label" style="color: white;" >Imagen</label>
                                 <input type="text" class="form-control" id="imagen{{ auto.id }}" name="imagen"
                                     value="{{ auto.imagen }}">
                             </div>
@@ -90,12 +90,11 @@
                     <form method="post" action="{% url 'eliminar_auto' auto.id %}">
                         {% csrf_token %}
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel{{ auto.id }}">Eliminar Auto</h5>
+                            <h5 class="modal-title" id="deleteModalLabel{{ auto.id }}"  style="color: white;" >Eliminar Auto</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>¿Está seguro que desea eliminar el auto <strong>{{ auto.marca }} {{ auto.modelo
-                                    }}</strong>?</p>
+                            <p>¿Está seguro que desea eliminar el auto <strong>{{ auto.marca }} {{ auto.modelo }}</strong>?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

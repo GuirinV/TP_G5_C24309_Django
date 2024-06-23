@@ -1,8 +1,11 @@
+
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms import ModelForm
+from django.utils import timezone
+
 from .models import Alquiler
 from django.contrib.auth.models import User
-
 
 
 class LoginForm (forms.Form):
@@ -48,12 +51,28 @@ class alta_autosForm(forms.Form):
     def clean(self):
         print(self.cleaned_data)
         return self.cleaned_data
-    
+
 class AlquilerForm(forms.ModelForm):
+    fecha_inicio = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date', 'value': timezone.now().strftime('%d/%m/%Y')}),
+        initial=timezone.now().strftime('%Y-%m-%d'),  # Usar timezone.now().date para obtener la fecha actual
+        label="Inicio de alquiler: "
+    )
+    fecha_fin = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date', 'value': timezone.now().strftime('%d/%m/%Y')}),
+        initial=timezone.now().strftime('%Y-%m-%d'),  # Usar timezone.now().date para obtener la fecha actual
+        label="Fin de Alquiler: "
+    )
+
     class Meta:
         model = Alquiler
         fields = ['fecha_inicio', 'fecha_fin', 'precio_total']
-        widgets = {
-            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
-            'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
-        }
+        # widgets = {
+        #     'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
+        #     'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
+        # }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['precio_total'].disabled = True
+
