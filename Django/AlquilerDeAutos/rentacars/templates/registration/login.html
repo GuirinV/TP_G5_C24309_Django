@@ -4,14 +4,15 @@
 {% block titulo %}Iniciar Sesión{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'rentacars/styles/login.css' %}">
+<link rel="stylesheet" href="{% static 'rentacars/styles/login.css' %}">
 {% endblock %}
 
 {% block main %}
 <div class="container-fluid bg-dark" id="about">
     <div class="row">
         <div class="col-md-6">
-            <img style="width: 100%; height: auto;" class="img-responsive" src="{% static 'rentacars/img/autoprueba5.jpg' %}" />
+            <img style="width: 100%; height: auto;" class="img-responsive"
+                src="{% static 'rentacars/img/autoprueba5.jpg' %}" />
         </div>
         <div class="col-md-6">
             <br>
@@ -22,34 +23,38 @@
             {% endif %}
             <div id="login" style="color: white;">
                 {% if messages %}
-                    <div>
-                        {% for message in messages %}
-                            <p>{{ message }}</p>
-                        {% endfor %}
-                    </div>
+                <div>
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
                 {% endif %}
                 {% if not user.is_authenticated %}
-                    {% if next %}
-                        <form method="POST" action="{% url 'login'%}">
-                        <input type="hidden" name="next" value="{{ next }}">
+                {% if next %}
+                <form method="POST" action="{% url 'login'%}">
+                    <input type="hidden" name="next" value="{{ next }}">
                     {% else %}
-                        <form method="POST" action="{% url 'login' %}">
-                    {% endif %}
+                    <form method="POST" action="{% url 'login' %}">
+                        {% endif %}
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <input type="submit" value="Iniciar Sesión">                        
-                        </form>
-                    
-                {% else %}
-                <form method="POST" action="{% url 'logout' %}">
+                        <input type="submit" value="Iniciar Sesión">
+                    </form>
+
+                    {% else %}
+                    <form method="POST" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <input type="submit" value="Cerrar sesión">
                     </form>
-                {% endif %}
-            <hr>
-                <div class="pie-form">
-                    <a href="{% url 'index' %}">Volver</a>
-                </div>
+                    {% endif %}
+                    <hr>
+                    <div class="pie-form">
+                        <a href="{% url 'registrarse' %}">Registrarse</a>
+                    </div>
+                    <br>
+                    <div class="pie-form">
+                        <a href="{% url 'index' %}">Volver</a>
+                    </div>
             </div>
         </div>
     </div>

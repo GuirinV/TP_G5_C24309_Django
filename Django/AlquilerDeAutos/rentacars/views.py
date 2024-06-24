@@ -148,9 +148,16 @@ def crear_alquiler(request, auto_id):
 
 @login_required
 def listado_alquileres(request):
-    alquileres = Alquiler.objects.all()
-    return render(request, 'rentacars/listado_alquileres.html', {'alquileres': alquileres})
-
+    usuario_auth = request.user  # Esto es una instancia del modelo User
+    try:
+        usuario = Usuario.objects.get(user=usuario_auth)
+        alquileres = Alquiler.objects.filter(usuario=usuario)
+        context = {'alquileres': alquileres}
+        return render(request, 'rentacars/listado_alquileres.html', context)
+    except Usuario.DoesNotExist:
+        messages.error(request, 'Usuario no encontrado.')
+        return redirect('index')
+    
 @login_required
 def editar_alquiler(request, alquiler_id):
     alquiler = get_object_or_404(Alquiler, id=alquiler_id)
