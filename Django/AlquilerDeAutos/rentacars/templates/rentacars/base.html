@@ -9,7 +9,6 @@
     <meta name="Grupo5-Django" content="Grupo5-Django">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
-    <link rel="shortcut icon" href="images/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'rentacars/styles/base.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -30,13 +29,10 @@
                         <a href="{% url 'nosotros' %}">Nosotros</a>
                     </li>
                     <li class="item">
-                        <a href="{% url 'contacto' %}">Contacto</a>
-                    </li>
-                    <li class="item">
                         {% if not user.is_authenticated %}
                         <a class="item-button" href="{% url 'login' %}"><i class="fa-solid fa-user"></i>Login</a>
                         {% else %}
-                        <a class="item-button" href="{% url 'login' %}"><i class="fa-solid fa-user"></i>{{ user.first_name }} {{ user.last_name }}</a>
+                        <a class="item-button" href="{% url 'login' %}"><i class="fa-solid fa-user"></i>{{ user.first_name }}</a>
                         {% endif %}
                     </li>
                     <!-- <li class="item-button">
@@ -117,7 +113,6 @@
                 <ul>
                     <li class="item"><a href="{% url 'index' %}">Inicio</a></li>
                     <li class="item"><a href="{% url 'nosotros' %}">Nosotros</a></li>
-                    <li class="item"><a href="{% url 'contacto' %}">Contacto</a></li>
                 </ul>
                     <div class="footercopy">
                     <p>Copyright &copy;2024 - Todos los derechos Reservados</p>

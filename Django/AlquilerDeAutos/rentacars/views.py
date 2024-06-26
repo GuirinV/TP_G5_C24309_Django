@@ -79,6 +79,7 @@ def alta_autos(request):
             nuevo_auto.save()
 
             return redirect('alta_autos')
+    contexto = {'form': form}
 
     return render(request, 'rentacars/alta_autos.html', contexto)
 
@@ -183,13 +184,3 @@ def eliminar_alquiler(request, alquiler_id):
 
 def nosotros(request):
     return render(request, 'rentacars/nosotros.html')
-
-def contacto(request):
-    contexto = {}
-    return render(request, 'rentacars/contacto.html', contexto)
-
-def perdiste_Contraseña(request):
-    contexto = {
-        'perdiste_Contraseña_form': forms.Perdiste_ContraseñaForm()
-    }
-    return render(request, 'rentacars/perdiste_Contraseña.html', contexto)

@@ -27,7 +27,7 @@
         <form method="POST" action="{% url 'alta_autos' %}">
             <h1>Alta de Autos</h1>
             {% csrf_token %}
-            {{ alta_autos_form.as_p }}
+            {{ form.as_p }}
             
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" ><a href="{% url 'index' %}" style="color: white; text-decoration: none;">Volver</a></button>
