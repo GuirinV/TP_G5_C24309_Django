@@ -29,8 +29,10 @@
             <td>{{ alquiler.fecha_fin }}</td>
             <td>${{ alquiler.precio_total }}</td>
             <td>
-                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#editModal{{ alquiler.id }}">Editar</button>
+{#                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"#}
+{#                    data-bs-target="#editModal{{ alquiler.id }}">Editar</button>#}
+                <a type="button" class="btn btn-warning btn-sm" href="{% url 'editar_alquiler' alquiler.id %}"
+                    data-bs-target="#editModal{{ alquiler.id }}">Editar</a>
                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                     data-bs-target="#deleteModal{{ alquiler.id }}">Cancelar</button>
             </td>
@@ -60,7 +62,7 @@
                             <div class="mb-3">
                                 <label for="precio_total{{ alquiler.id }}" class="form-label">Precio Total</label>
                                 <input type="number" class="form-control" id="precio_total{{ alquiler.id }}"
-                                    name="precio_total" value="{{ alquiler.precio_total }}">
+                                    name="precio_total" value="{{ alquiler.precio_total }}" disabled>
                             </div>
                         </div>
                         <div class="modal-footer">
