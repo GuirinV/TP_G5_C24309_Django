@@ -1,4 +1,3 @@
-
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
@@ -8,12 +7,16 @@ from .models import Alquiler, Auto
 from django.contrib.auth.models import User
 
 
-class LoginForm (forms.Form):
-    username = forms.CharField(label='Nombre de Usuario', required=True, widget=forms.TextInput(attrs={'class': 'input_clase2'}),label_suffix='')
-    password= forms.CharField(label='Password', required=True,widget=forms.PasswordInput(attrs={'class': 'input_clase2'}),label_suffix='')
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Nombre de Usuario', required=True,
+                               widget=forms.TextInput(attrs={'class': 'input_clase2'}), label_suffix='')
+    password = forms.CharField(label='Password', required=True,
+                               widget=forms.PasswordInput(attrs={'class': 'input_clase2'}), label_suffix='')
 
-class Perdiste_ContraseñaForm (forms.Form):
+
+class Perdiste_ContraseñaForm(forms.Form):
     email = forms.EmailField(label='Email', required=True)
+
 
 class RegistrarseForm(forms.ModelForm):
     nombre = forms.CharField(max_length=30)
@@ -22,17 +25,26 @@ class RegistrarseForm(forms.ModelForm):
     cuit = forms.CharField(max_length=20)
     telefono = forms.CharField(max_length=20)
     password = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password', 'nombre', 'apellido', 'cuit', 'direccion', 'telefono']
 
+
 class alta_autosForm(forms.Form):
-    marca = forms.CharField(label='Marca', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
-    modelo = forms.CharField(label='Modelo', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
-    color = forms.CharField(label='Color', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
-    patente = forms.CharField(label='Patente', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
-    precio = forms.CharField(label='Precio', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='') 
-    imagen = forms.CharField(label='Imagen', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),label_suffix='')
+    marca = forms.CharField(label='Marca', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),
+                            label_suffix='')
+    modelo = forms.CharField(label='Modelo', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),
+                             label_suffix='')
+    color = forms.CharField(label='Color', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),
+                            label_suffix='')
+    patente = forms.CharField(label='Patente', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),
+                              label_suffix='')
+    precio = forms.CharField(label='Precio', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),
+                             label_suffix='')
+    imagen = forms.CharField(label='Imagen', required=True, widget=forms.TextInput(attrs={'class': 'input_clase'}),
+                             label_suffix='')
+
     def clean_Marca(self):
         marca = self.cleaned_data['marca']
         if not marca.isalpha():
@@ -53,32 +65,30 @@ class alta_autosForm(forms.Form):
         except ValueError:
             raise ValidationError("El Precio solo puede estar compuesto por números")
         return precio_entero
-    
+
     def clean(self):
         print(self.cleaned_data)
         return self.cleaned_data
 
+
 class AlquilerForm(forms.ModelForm):
-    fecha_inicio = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date', 'value': timezone.now().strftime('%d/%m/%Y')}),
-        initial=timezone.now().strftime('%Y-%m-%d'),  # Usar timezone.now().date para obtener la fecha actual
-        label="Inicio de alquiler: "
-    )
-    fecha_fin = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date', 'value': timezone.now().strftime('%d/%m/%Y')}),
-        initial=timezone.now().strftime('%Y-%m-%d'),  # Usar timezone.now().date para obtener la fecha actual
-        label="Fin de Alquiler: "
-    )
 
     class Meta:
         model = Alquiler
         fields = ['fecha_inicio', 'fecha_fin', 'precio_total']
-        # widgets = {
-        #     'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
-        #     'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
-        # }
+        widgets = {
+            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+            'fecha_fin': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+        }
+        labels = {
+            'fecha_inicio': "Inicio de alquiler: ",
+            'fecha_fin': "Fin de Alquiler: "
+        }
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args,**kwargs)
-        self.fields['precio_total'].disabled = True
+        super(AlquilerForm, self).__init__(*args, **kwargs)
+        self.fields['precio_total'].disabled = True,
+        self.fields['fecha_inicio'].initial = timezone.now().strftime('%Y-%m-%d')
+        self.fields['fecha_fin'].initial = timezone.now().strftime('%Y-%m-%d')
+
 
