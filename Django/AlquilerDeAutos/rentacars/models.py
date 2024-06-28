@@ -34,7 +34,16 @@ class Usuario(models.Model):
         return f"{self.nombre} {self.apellido}"
 
 
-
+    
+    def save(self, *args, **kwargs):
+        # Actualiza los campos first_name y last_name del usuario
+        self.user.first_name = self.nombre
+        self.user.last_name = self.apellido
+        # Si la contraseña ha cambiado, asegúrate de encriptarla
+        if not self.user.check_password(self.password):
+            self.user.set_password(self.password)
+        self.user.save()
+        super().save(*args, **kwargs)
 
 class Alquiler(models.Model):
     auto = models.ForeignKey(Auto, on_delete=models.CASCADE, verbose_name='Auto')

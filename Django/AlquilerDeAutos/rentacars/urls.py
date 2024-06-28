@@ -19,6 +19,7 @@ urlpatterns = [
     # path('alquiler_autos/', views.alquiler_autos, name='alquiler_autos'),
     path('editar_auto/<int:id>/', views.editar_auto, name='editar_auto'),
     path('eliminar_auto/<int:id>/', views.eliminar_auto, name='eliminar_auto'),
+    path('permission_denied/', views.permission_denied_view, name='permission_denied'),
 
     path('crear_alquiler/<int:auto_id>/', views.crear_alquiler, name='crear_alquiler'),
     path('get_precio_diario/<int:id>/', views.get_precio_diario, name='obtener_precio_alquiler'),

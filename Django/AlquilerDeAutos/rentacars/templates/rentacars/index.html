@@ -37,20 +37,22 @@
 <section class="cardAuto">
   {% for auto in autos %}
   <div class="card mb-3">
-      <div class="row g-0">
-          <div class="col-md-4">
-              <img src="{{ auto.imagen }}" style="width: 250px; height: 150px; object-fit: cover;" class="img-fluid rounded-start" alt="{{ auto.marca }}">
-          </div>
-          <div class="col-md-8">
-              <div class="card-body">
-                  <h5 class="card-title">{{ auto.marca }}</h5>
-                  <p class="card-text">Modelo: {{ auto.modelo }}</p>
-                  <p class="card-text">Color: {{ auto.color }}</p>
-                  <p class="card-text">Precio: ${{ auto.precio }} por día</p>
-                   <a class="btn btnAlquilar" href="{% url 'crear_alquiler' auto.id %}" role="button" style="font-size: 20px;">Alquilar</a>        
-              </div>
-          </div>
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ auto.imagen }}" style="width: 250px; height: 150px; object-fit: cover;"
+          class="img-fluid rounded-start" alt="{{ auto.marca }}">
       </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ auto.marca }}</h5>
+          <p class="card-text">Modelo: {{ auto.modelo }}</p>
+          <p class="card-text">Color: {{ auto.color }}</p>
+          <p class="card-text">Precio: ${{ auto.precio }} por día</p>
+          <a class="btn btnAlquilar" href="{% url 'crear_alquiler' auto.id %}" role="button"
+            style="font-size: 20px;">Alquilar</a>
+        </div>
+      </div>
+    </div>
   </div>
   {% endfor %}
 </section>

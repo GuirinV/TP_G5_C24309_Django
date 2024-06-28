@@ -1,17 +1,17 @@
 import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .import forms 
 from .forms import alta_autosForm
 from .models import Auto, Usuario, Alquiler
 from .forms import AlquilerForm
 from .forms import RegistrarseForm
 from django.contrib.auth import login, logout
-
+from django.urls import reverse_lazy
 
 # Otra opcion: from .forms import * (y se le quita forms abajo)
 
@@ -37,10 +37,14 @@ def usuario_logout(request):
     logout(request)
     return render(request, 'login')
 
+@login_required
+@user_passes_test(lambda u: u.is_staff,login_url=reverse_lazy('permission_denied'))
 def listado_autos(request):
     contexto = obtener_autos()
     return render(request, 'rentacars/listado_autos.html', contexto)
 
+@login_required
+@user_passes_test(lambda u: u.is_staff,login_url=reverse_lazy('permission_denied'))
 def editar_auto(request, id):
     auto = get_object_or_404(Auto, id=id)
     if request.method == 'POST':
@@ -54,6 +58,8 @@ def editar_auto(request, id):
         return redirect('listado_autos')
     return render(request, 'rentacars/editar_auto.html', {'auto': auto})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff,login_url=reverse_lazy('permission_denied'))
 def eliminar_auto(request, id):
     auto = get_object_or_404(Auto, id=id)
     if request.method == 'POST':
@@ -62,6 +68,8 @@ def eliminar_auto(request, id):
         return redirect('listado_autos')
     return render(request, 'rentacars/eliminar_auto.html', {'auto': auto})
 
+@login_required
+@user_passes_test(lambda u: u.is_staff,login_url=reverse_lazy('permission_denied'))
 def alta_autos(request):
     if request.method == "GET":
         form = alta_autosForm()
@@ -184,3 +192,9 @@ def eliminar_alquiler(request, alquiler_id):
 
 def nosotros(request):
     return render(request, 'rentacars/nosotros.html')
+
+
+@login_required
+def permission_denied_view(request):
+    messages.error(request, 'No tienes permisos para acceder a esta página.')
+    return redirect('index')

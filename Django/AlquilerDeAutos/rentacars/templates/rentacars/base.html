@@ -1,6 +1,7 @@
 {% load static %}
 <!doctype html>
 <html class="no-js" lang="en">
+
 <head>
     <title>RentaCars - {% block titulo %}{% endblock %}</title>
     <meta name="description" content="¡Alquila un coche en Buenos Aires y explora la ciudad a tu propio ritmo! Encuentra las mejores opciones de alquiler de coches 
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     {% block extra_css%} {% endblock %}
 </head>
+
 <body>
     <header>
         <div class="container-fluid">
@@ -28,56 +30,63 @@
                     <li class="item">
                         <a href="{% url 'nosotros' %}">Nosotros</a>
                     </li>
+
+                    {% if user.is_staff %}
+
+                    <li class="item">
+                        <a href="{% url 'listado_autos'%}">Lista Autos</a>
+                    </li>
+                    <li class="item">
+                        <a href="{% url 'alta_autos'%}">Alta Autos</a>
+                    </li>
+                    {% endif %}
+
                     <li class="item">
                         {% if not user.is_authenticated %}
                         <a class="item-button" href="{% url 'login' %}"><i class="fa-solid fa-user"></i>Login</a>
                         {% else %}
-                        <a class="item-button" href="{% url 'login' %}"><i class="fa-solid fa-user"></i>{{ user.first_name }}</a>
+                        <a class="item-button" href="{% url 'login' %}"><i class="fa-solid fa-user"></i>{{user}}</a>
                         {% endif %}
                     </li>
-                    <!-- <li class="item-button">
-                        <button class="btn" type="button"><i class="fa-solid fa-user"></i>LOGIN</button>
-                    </li> -->
-
-
-                    
                 </ul>
-            
-            <!-- Button trigger modal -->
-            <div class="mobile-toogler d-lg-none">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#navbModal">
-                    <i class="fa-solid fa-bars"></i>
-                </a>
-            </div>
-            
-            <!-- Modal -->
-            <div class="modal fade" id="navbModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-x"></i></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="modal-line">
-                                <i class="fa-solid fa-house"></i> <a href="/">Home</a>
+
+                <!-- Button trigger modal -->
+                <div class="mobile-toogler d-lg-none">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#navbModal">
+                        <i class="fa-solid fa-bars"></i>
+                    </a>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="navbModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                                        class="fa-solid fa-x"></i></button>
                             </div>
-                            <div class="modal-line">
-                                <i class="fa-solid fa-user"></i><a href="/">Nosotros</a>
+                            <div class="modal-body">
+                                <div class="modal-line">
+                                    <i class="fa-solid fa-house"></i> <a href="/">Home</a>
+                                </div>
+                                <div class="modal-line">
+                                    <i class="fa-solid fa-user"></i><a href="/">Nosotros</a>
+                                </div>
+                                <div class="modal-line">
+                                    <i class="fa-solid fa-envelope"></i> <a href="/">Contacto</a>
+                                </div>
+                                <a href="#" class="navb-button" type="button"><i class="fa-solid fa-user"></i>LOGIN</a>
                             </div>
-                            <div class="modal-line">
-                                <i class="fa-solid fa-envelope"></i> <a href="/">Contacto</a>
+                            <div class="mobil-modal-footer">
+                                <a target="_blank" href="#"><i class="fa-brands fa-facebook"></i></a>
+                                <a target="_blank" href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a target="_blank" href="#"><i class="fa-brands fa-youtube"></i></a>
+                                <a target="_blank" href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
                             </div>
-                            <a href="#" class="navb-button" type="button"><i class="fa-solid fa-user"></i>LOGIN</a>
-                        </div>
-                        <div class="mobil-modal-footer">
-                            <a target="_blank" href="#"><i class="fa-brands fa-facebook"></i></a>
-                            <a target="_blank" href="#"><i class="fa-brands fa-instagram"></i></a>
-                            <a target="_blank" href="#"><i class="fa-brands fa-youtube"></i></a>
-                            <a target="_blank" href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
                         </div>
                     </div>
                 </div>
-            </div>
             </nav>
         </div>
     </header>
@@ -85,14 +94,14 @@
     <main>
         <div class="container mt-4">
             {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
 
@@ -113,11 +122,12 @@
                 <ul>
                     <li class="item"><a href="{% url 'index' %}">Inicio</a></li>
                     <li class="item"><a href="{% url 'nosotros' %}">Nosotros</a></li>
+
                 </ul>
-                    <div class="footercopy">
+                <div class="footercopy">
                     <p>Copyright &copy;2024 - Todos los derechos Reservados</p>
                 </div>
-                
+
             </div>
         </div>
 
@@ -125,4 +135,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

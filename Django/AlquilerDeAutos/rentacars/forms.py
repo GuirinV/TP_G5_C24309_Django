@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.utils import timezone
 
-from .models import Alquiler
+from .models import Alquiler, Auto
 from django.contrib.auth.models import User
 
 
@@ -38,7 +38,13 @@ class alta_autosForm(forms.Form):
         if not marca.isalpha():
             raise ValidationError("La Marca solo puede estar compuesta por letras")
         return self.cleaned_data['Marca']
-
+    
+    def clean_patente(self):
+        patente = self.cleaned_data['patente']
+        if Auto.objects.filter(patente=patente).exists():
+            raise ValidationError("Ya existe un auto con esta patente")
+        return patente
+    
     def clean_Precio(self):
         precio = self.cleaned_data['precio']
         # Intenta convertir el precio a un entero
