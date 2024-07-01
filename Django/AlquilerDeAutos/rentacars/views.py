@@ -177,7 +177,8 @@ def editar_alquiler(request, alquiler_id):
     else:
         form = AlquilerForm(instance=alquiler)
 
-    return render(request, 'rentacars/crear_alquiler.html', {'form': form, 'auto': auto})
+    return render(request, 'rentacars/editar_alquiler.html', {'form': form, 'auto': auto})
+
 
 @login_required
 def eliminar_alquiler(request, alquiler_id):
