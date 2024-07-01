@@ -95,30 +95,6 @@ def alta_autos(request):
     return render(request, 'rentacars/alta_autos.html', contexto)
 
 
-# def alquiler_autos(request):
-#     contexto = {}
-#     if request.method == "GET":
-#         contexto['alquiler_autos_form'] = alquiler_autosForm()
-#     else:
-#         form = alquiler_autosForm(request.POST)
-#         contexto['alquiler_autos_form'] = form
-#         # Validar el formulario
-#         if form.is_valid():
-#             messages.success(request, 'El Alquiler fue registrado con éxito')
-#             precio_diario = Auto.objects.get(id=form.cleaned_data['auto'].id).precio
-#             dias = form.cleaned_data['fecha_fin'] - form.cleaned_data['fecha_inicio']
-#             nuevo_alquiler = Alquiler(
-#                 auto=form.cleaned_data['auto'],
-#                 usuario=form.cleaned_data['usuario'],
-#                 fecha_inicio=form.cleaned_data['fecha_inicio'],
-#                 fecha_fin=form.cleaned_data['fecha_fin'],
-#                 precio_total= precio_diario * (dias.days + 1)
-#             )
-#             nuevo_alquiler.save()
-#
-#             return redirect('alquiler_autos')
-#
-#     return render(request, 'rentacars/alquiler_autos.html', contexto)
 
 def registrarse(request):
     contexto = {}
