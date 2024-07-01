@@ -26,11 +26,11 @@
             <td>
                 <img src="{{ auto.imagen }}" class="img-fluid" alt="{{ auto.marca }}" style="max-width: 100px;">
             </td>
-            <td>{{ auto.marca }}</td>
-            <td>{{ auto.modelo }}</td>
-            <td>{{ auto.patente }}</td>
-            <td>{{ auto.color }}</td>
-            <td>${{ auto.precio }} por día</td>
+            <td>{{ auto.marca | upper}}</td>
+            <td>{{ auto.modelo | upper}}</td>
+            <td>{{ auto.patente| upper }}</td>
+            <td>{{ auto.color | upper}}</td>
+            <td>${{ auto.precio}} por día</td>
             <td>
                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                     data-bs-target="#editModal{{ auto.id }}">Editar</button>
@@ -63,7 +63,7 @@
                             <div class="mb-3">
                                 <label for="color{{ auto.id }}" class="form-label" style="color: white;" >Color</label>
                                 <input type="text" class="form-control" id="color{{ auto.id }}" name="color"
-                                    value="{{ auto.color }}">
+                                    value="{{ auto.color}} " >
                             </div>
                             <div class="mb-3">
                                 <label for="precio{{ auto.id }}" class="form-label" style="color: white;" >Precio</label>
