@@ -27,18 +27,23 @@
                     <li class="item">
                         <a href="{% url 'index' %}">Home</a>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li class="item">
+                            <a href="{% url 'listado_alquileres' %}">Listado de Alquileres</a>
+                        </li>
+                    {% endif %}
+                    
                     <li class="item">
                         <a href="{% url 'nosotros' %}">Nosotros</a>
                     </li>
 
                     {% if user.is_staff %}
-
-                    <li class="item">
-                        <a href="{% url 'listado_autos'%}">Lista Autos</a>
-                    </li>
-                    <li class="item">
-                        <a href="{% url 'alta_autos'%}">Alta Autos</a>
-                    </li>
+                        <li class="item">
+                            <a href="{% url 'listado_autos'%}">Lista Autos</a>
+                        </li>
+                        <li class="item">
+                            <a href="{% url 'alta_autos'%}">Alta Autos</a>
+                        </li>
                     {% endif %}
 
                     <li class="item">
@@ -68,15 +73,33 @@
                             </div>
                             <div class="modal-body">
                                 <div class="modal-line">
-                                    <i class="fa-solid fa-house"></i> <a href="/">Home</a>
+                                    <i class="fa-solid fa-house"></i> <a href="{% url 'index' %}">Home</a>
                                 </div>
+                                 {% if user.is_authenticated %}
+                                    <div class="modal-line">
+                                        <i class="fa-solid fa-list"></i> <a href="{% url 'listado_alquileres' %}">Listado de Alquileres</a>
+                                    </div>
+                                {% endif %}
+                                
                                 <div class="modal-line">
-                                    <i class="fa-solid fa-user"></i><a href="/">Nosotros</a>
+                                   <i class="fa-solid fa-people-group"></i> <a href="{% url 'nosotros' %}" >Nosotros</a>
                                 </div>
-                                <div class="modal-line">
-                                    <i class="fa-solid fa-envelope"></i> <a href="/">Contacto</a>
-                                </div>
-                                <a href="#" class="navb-button" type="button"><i class="fa-solid fa-user"></i>LOGIN</a>
+                                
+                                {% if user.is_staff %}
+                                    <div class="modal-line">
+                                        <i class="fa-solid fa-list"></i> <a href="{% url 'listado_autos'%}">Lista Autos</a>
+                                    </div>
+                                    <div class="modal-line">
+                                        <i class="fa-solid fa-plus"></i> <a href="{% url 'alta_autos'%}">Alta Autos</a>
+                                    </div>
+                                {% endif %}
+
+                                {% if not user.is_authenticated %}
+                                  <a class="item-button" href="{% url 'login' %}"><i class="fa-solid fa-user"></i>Login</a>
+                                {% else %}
+                                  <a class="item-button" href="{% url 'login' %}"><i class="fa-solid fa-user"></i>{{user}}</a>
+                                {% endif %}
+                                
                             </div>
                             <div class="mobil-modal-footer">
                                 <a target="_blank" href="#"><i class="fa-brands fa-facebook"></i></a>
