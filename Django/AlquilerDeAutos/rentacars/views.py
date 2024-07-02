@@ -172,13 +172,27 @@ def editar_alquiler(request, alquiler_id):
     if request.method == 'POST':
         form = AlquilerForm(request.POST, instance=alquiler)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Alquiler actualizado con éxito.')
-            return redirect('listado_alquileres')
+            dias = form.cleaned_data['fecha_fin'] - form.cleaned_data['fecha_inicio']
+            alquiler = form.save(commit=False)
+            usuario_auth = request.user
+            try:
+                usuario = Usuario.objects.get(user=usuario_auth)
+                alquiler.usuario = usuario
+                alquiler.auto = auto
+                alquiler.precio_total = auto.precio * (dias.days + 1)
+                alquiler.save()
+                messages.success(request, 'Alquiler creado con éxito.')
+                return redirect('listado_alquileres')
+            except Usuario.DoesNotExist:
+                messages.error(request, 'Usuario no encontrado.')
+
+            # form.save()
+            # messages.success(request, 'Alquiler actualizado con éxito.')
+            # return redirect('listado_alquileres')
     else:
         form = AlquilerForm(instance=alquiler)
 
-    return render(request, 'rentacars/editar_alquiler.html', {'form': form, 'auto': auto})
+    return render(request, 'rentacars/editar_alquiler.html', {'form': form, 'auto': auto, 'alquiler':alquiler})
 
 @login_required
 def eliminar_alquiler(request, alquiler_id):

@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <input type="hidden" id="id_auto" value="{{ auto.id }}">
-                    <form method="post" action="{% url 'editar_alquiler' auto.id %}">
+                    <form method="post" action="{% url 'editar_alquiler' alquiler.id %}">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit" class="btn btn-primary">Guardar</button>
