@@ -163,6 +163,7 @@ def listado_alquileres(request):
         messages.error(request, 'Usuario no encontrado.')
         return redirect('index')
 
+
 @login_required
 def editar_alquiler(request, alquiler_id):
     alquiler = get_object_or_404(Alquiler, id=alquiler_id)
@@ -178,7 +179,6 @@ def editar_alquiler(request, alquiler_id):
         form = AlquilerForm(instance=alquiler)
 
     return render(request, 'rentacars/editar_alquiler.html', {'form': form, 'auto': auto})
-
 
 @login_required
 def eliminar_alquiler(request, alquiler_id):

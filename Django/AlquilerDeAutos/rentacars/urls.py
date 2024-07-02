@@ -23,6 +23,5 @@ urlpatterns = [
     path('listado_alquileres/', views.listado_alquileres, name='listado_alquileres'),
     path('editar_alquiler/<int:alquiler_id>/', views.editar_alquiler, name='editar_alquiler'),
     path('eliminar_alquiler/<int:alquiler_id>/', views.eliminar_alquiler, name='eliminar_alquiler'),
-    path('listado_alquileres/', views.listado_alquileres, name='listado_alquileres'),
     path('get_precio_diario/<int:id>/', views.get_precio_diario, name='obtener_precio_alquiler'),
 ]
