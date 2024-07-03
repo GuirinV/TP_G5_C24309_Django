@@ -187,7 +187,7 @@ def editar_alquiler(request, alquiler_id):
                 alquiler.auto = auto
                 alquiler.precio_total = auto.precio * (dias.days + 1)
                 alquiler.save()
-                messages.success(request, 'Alquiler creado con éxito.')
+                messages.success(request, 'Alquiler actualizado con éxito.')
                 return redirect('listado_alquileres')
             except Usuario.DoesNotExist:
                 messages.error(request, 'Usuario no encontrado.')
