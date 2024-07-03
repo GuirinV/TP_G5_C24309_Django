@@ -26,24 +26,23 @@ class Usuario(models.Model):
     cuit = models.PositiveIntegerField(unique=True, verbose_name='CUIT')
     direccion = models.CharField(max_length=255, verbose_name='Dirección')
     telefono = models.CharField(max_length=15, verbose_name='Teléfono')
-    email = models.EmailField(unique=True, verbose_name='Correo Electrónico')
-    username = models.CharField(max_length=100, verbose_name='Nombre de Usuario')
-    password = models.CharField(max_length=100, verbose_name='Contraseña')
+    # email = models.EmailField(unique=True, verbose_name='Correo Electrónico')
+    # username = models.CharField(max_length=100, verbose_name='Nombre de Usuario')
+    # password = models.CharField(max_length=100, verbose_name='Contraseña')
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
-
-    
-    def save(self, *args, **kwargs):
-        # Actualiza los campos first_name y last_name del usuario
-        self.user.first_name = self.nombre
-        self.user.last_name = self.apellido
-        # Si la contraseña ha cambiado, asegúrate de encriptarla
-        if not self.user.check_password(self.password):
-            self.user.set_password(self.password)
-        self.user.save()
-        super().save(*args, **kwargs)
+    # No es necesario porque no editamos el usuario!
+    # def save(self, *args, **kwargs):
+    #     # Actualiza los campos first_name y last_name del usuario
+    #     # self.user.first_name = self.nombre
+    #     # self.user.last_name = self.apellido
+    #     # Si la contraseña ha cambiado, asegúrate de encriptarla
+    #     # if not self.user.check_password(self.password):
+    #     #     self.user.set_password(self.password)
+    #     # self.user.save()
+    #     super().save(*args, **kwargs)
 
 class Alquiler(models.Model):
     auto = models.ForeignKey(Auto, on_delete=models.CASCADE, verbose_name='Auto')

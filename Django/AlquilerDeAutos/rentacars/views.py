@@ -117,7 +117,10 @@ def registrarse(request):
                 apellido=form.cleaned_data['apellido'],
                 cuit=form.cleaned_data['cuit'],
                 direccion=form.cleaned_data['direccion'],
-                telefono=form.cleaned_data['telefono']
+                telefono=form.cleaned_data['telefono'],
+                # username=form.cleaned_data['username'],
+                # password=form.cleaned_data['password'],
+                # email=form.cleaned_data['email'],
             )
             nuevo_usuario.save()
             login(request, user)  # Iniciar sesión automáticamente
@@ -155,8 +158,11 @@ def crear_alquiler(request, auto_id):
 def listado_alquileres(request):
     usuario_auth = request.user  # Esto es una instancia del modelo User
     try:
-        usuario = Usuario.objects.get(user=usuario_auth)
-        alquileres = Alquiler.objects.filter(usuario=usuario)
+        if usuario_auth.is_superuser:
+            alquileres = Alquiler.objects.all()
+        else:
+            usuario = Usuario.objects.get(user=usuario_auth)
+            alquileres = Alquiler.objects.filter(usuario=usuario)
         context = {'alquileres': alquileres}
         return render(request, 'rentacars/listado_alquileres.html', context)
     except Usuario.DoesNotExist:
